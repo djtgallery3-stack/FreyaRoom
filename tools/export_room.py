@@ -56,20 +56,42 @@ for name in DOLLS:
     bpy.context.view_layer.objects.active = o
     o.select_set(True)
     faces = len(o.data.polygons)
-    target_faces = DOLL_TARGET_VERTS * 2
+    target_faces = 240000
     if faces > target_faces:
         mod = o.modifiers.new("WebDecimate", "DECIMATE")
         mod.ratio = target_faces / faces
+        mod.delimit = {'UV'}
         bpy.ops.object.modifier_apply(modifier=mod.name)
+    for poly in o.data.polygons:
+        poly.use_smooth = True
     o.select_set(False)
     print("DOLL", name, len(o.data.vertices), "verts")
 
+    # Clean doll materials: disconnect harsh normal maps & fix metallic/roughness for porcelain/plush finish
+    for slot in o.material_slots:
+        mat = slot.material
+        if not mat or not mat.use_nodes:
+            continue
+        for node in mat.node_tree.nodes:
+            if node.type == 'BSDF_PRINCIPLED':
+                normal_inp = node.inputs.get('Normal')
+                if normal_inp and normal_inp.is_linked:
+                    mat.node_tree.links.remove(normal_inp.links[0])
+                metallic_inp = node.inputs.get('Metallic')
+                if metallic_inp and metallic_inp.is_linked:
+                    mat.node_tree.links.remove(metallic_inp.links[0])
+                metallic_inp.default_value = 0.0
+                roughness_inp = node.inputs.get('Roughness')
+                if roughness_inp and roughness_inp.is_linked:
+                    mat.node_tree.links.remove(roughness_inp.links[0])
+                roughness_inp.default_value = 0.65
+
 # ---------------------------------------------------------------- procedural materials
 # glTF can't carry Blender's procedural shader trees (wallpaper, wood floor): the exporter
-# would fall back to flat 0.8 grey. Replace them with a representative flat colour.
+# would fall back to flat 0.8 grey. Replace them with warm, charming movie-reel tones.
 FLAT = {
-    "Mat_FloralWallpaper": (0.74, 0.68, 0.74, 1.0),
-    "Mat_LightOakFloor": (0.50, 0.37, 0.27, 1.0),
+    "Mat_FloralWallpaper": (0.91, 0.84, 0.83, 1.0),
+    "Mat_LightOakFloor": (0.58, 0.44, 0.32, 1.0),
 }
 
 

@@ -2,16 +2,16 @@
  * Real-time aesthetic Visitor Counter widget for Freya's Room.
  * Uses a resilient strategy:
  * 1. Queries live global hit badge from komarev / serverless endpoint.
- * 2. Seamlessly falls back to localStorage with baseline 1,428 visits.
+ * 2. Seamlessly falls back to localStorage with baseline 1 visit.
  * 3. Animates number roll-up with Indonesian locale formatting.
  */
 export class VisitorCounter {
   constructor({ counterEl, badgeEl } = {}) {
     this.counterEl = counterEl ?? document.getElementById('visitor-count');
     this.badgeEl = badgeEl ?? document.getElementById('visitor-counter');
-    this.storageKey = 'freya_room_visitor_count';
-    this.sessionKey = 'freya_room_session_visited';
-    this.fallbackBase = 1428;
+    this.storageKey = 'freya_room_visitor_count_v2';
+    this.sessionKey = 'freya_room_session_visited_v2';
+    this.fallbackBase = 1;
   }
 
   async init() {
@@ -25,7 +25,7 @@ export class VisitorCounter {
   }
 
   async #fetchAndIncrement() {
-    // 1. Local baseline
+    // 1. Local baseline starting purely from 1
     let stored = parseInt(localStorage.getItem(this.storageKey) || '0', 10);
     if (!stored || stored < this.fallbackBase) {
       stored = this.fallbackBase;
@@ -35,29 +35,28 @@ export class VisitorCounter {
     const hasVisitedThisSession = sessionStorage.getItem(this.sessionKey);
     if (!hasVisitedThisSession) {
       sessionStorage.setItem(this.sessionKey, '1');
-      stored += 1;
+      if (!localStorage.getItem(this.storageKey)) {
+        stored = 1;
+      } else {
+        stored += 1;
+      }
       localStorage.setItem(this.storageKey, String(stored));
     }
 
-    // 2. Attempt remote live hit counter
+    // 2. Attempt remote live hit counter / API
     try {
-      const res = await fetch('https://komarev.com/ghpvc/?username=djtgallery3-stack-freyaroom&style=flat', {
-        signal: AbortSignal.timeout(2500),
+      const res = await fetch('/api/counter', {
+        signal: AbortSignal.timeout(2000),
       });
       if (res.ok) {
-        const text = await res.text();
-        const matches = [...text.matchAll(/<text[^>]*>([0-9]+)<\/text>/g)];
-        if (matches.length > 0) {
-          const remoteCount = parseInt(matches[matches.length - 1][1], 10);
-          if (!isNaN(remoteCount)) {
-            const finalCount = this.fallbackBase + remoteCount;
-            localStorage.setItem(this.storageKey, String(finalCount));
-            return finalCount;
-          }
+        const data = await res.json();
+        if (typeof data.visitors === 'number' && data.visitors >= 1) {
+          localStorage.setItem(this.storageKey, String(data.visitors));
+          return data.visitors;
         }
       }
     } catch {
-      // Offline / blocked by adblock: keep stored fallback count
+      // Offline / serverless unavailable: use stored count
     }
 
     return stored;

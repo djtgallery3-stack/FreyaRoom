@@ -24,7 +24,17 @@ export class OrbitViewer {
     this.#init();
     this.#clear();
 
-    const model = new THREE.Mesh(sourceMesh.geometry, sourceMesh.material);
+    const mat = sourceMesh.material.clone();
+    mat.roughness = 0.62;
+    mat.metalness = 0.0;
+    mat.flatShading = false;
+    mat.normalMap = null; // Clean smooth rendering without decimation seam artifacts
+    mat.needsUpdate = true;
+
+    const geom = sourceMesh.geometry.clone();
+    geom.computeVertexNormals();
+
+    const model = new THREE.Mesh(geom, mat);
     model.geometry.computeBoundingBox();
     const box = model.geometry.boundingBox;
     const size = box.getSize(new THREE.Vector3());
@@ -35,8 +45,8 @@ export class OrbitViewer {
     model.position.copy(center).multiplyScalar(-1);
     pivot.add(model);
     pivot.scale.setScalar(scale);
-    // Keep the doll's authored yaw so it faces the viewer like it faces the room.
-    pivot.rotation.y = new THREE.Euler().setFromQuaternion(sourceMesh.getWorldQuaternion(new THREE.Quaternion()), 'YXZ').y;
+    // Angle the doll towards the viewer at an aesthetic 3/4 front angle
+    pivot.rotation.y = 0.35;
     this.#scene.add(pivot);
     this.#model = pivot;
 
@@ -70,10 +80,12 @@ export class OrbitViewer {
     const pmrem = new THREE.PMREMGenerator(r);
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
     pmrem.dispose();
-    scene.add(new THREE.HemisphereLight(0xfff0f5, 0x3a2a4a, 0.8));
-    const key = new THREE.DirectionalLight(0xffffff, 2.2);
+    scene.add(new THREE.HemisphereLight(0xfff0f5, 0x4a3250, 0.9));
+    const key = new THREE.DirectionalLight(0xfffaed, 2.0);
     key.position.set(2, 3, 3);
-    scene.add(key);
+    const rim = new THREE.DirectionalLight(0xffd5e5, 1.2);
+    rim.position.set(-2, 2, -2);
+    scene.add(key, rim);
     this.#scene = scene;
 
     this.#camera = new THREE.PerspectiveCamera(35, 1, 0.05, 20);

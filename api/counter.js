@@ -6,18 +6,18 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  const BASE_VISITS = 1428;
+  const BASE_VISITS = 1;
 
   try {
-    const upstream = await fetch('https://komarev.com/ghpvc/?username=djtgallery3-stack-freyaroom&style=flat');
+    const upstream = await fetch('https://komarev.com/ghpvc/?username=djtgallery3-stack-freyaroom-v2&style=flat');
     if (upstream.ok) {
       const text = await upstream.text();
       const match = text.match(/<text[^>]*>([0-9]+)<\/text>/g);
       if (match && match.length > 0) {
         const last = match[match.length - 1].replace(/<[^>]+>/g, '');
         const num = parseInt(last, 10);
-        if (!isNaN(num)) {
-          return res.status(200).json({ visitors: BASE_VISITS + num });
+        if (!isNaN(num) && num > 0) {
+          return res.status(200).json({ visitors: num });
         }
       }
     }

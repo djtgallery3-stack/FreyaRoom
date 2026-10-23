@@ -60,6 +60,11 @@ export async function loadWorld(scene, renderer, onProgress) {
         m.polygonOffset = true;
         m.polygonOffsetFactor = -2;
       }
+      // Give the desk lamp shade a warm ambient glow
+      if (o.name === 'Lamp_S') {
+        m.emissive = new THREE.Color(0xffd48a);
+        m.emissiveIntensity = 2.0;
+      }
     }
   });
   const find = (n) => byName.get(sanitize(n));
@@ -163,6 +168,15 @@ function buildInteractables(root, find, scene) {
       continue;
     }
     mesh.material = mesh.material.clone();
+    mesh.material.normalMap = null;
+    mesh.material.roughness = 0.65;
+    mesh.material.metalness = 0.0;
+    mesh.material.flatShading = false;
+    mesh.material.needsUpdate = true;
+    if (mesh.geometry) {
+      mesh.geometry = mesh.geometry.clone();
+      mesh.geometry.computeVertexNormals();
+    }
     addProxy(new THREE.Box3().setFromObject(mesh), {
       kind: 'doll',
       title,
