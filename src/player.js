@@ -76,7 +76,7 @@ export class Player {
       if (k.has('KeyW') || k.has('ArrowUp')) f += 1;
       if (k.has('KeyS') || k.has('ArrowDown')) f -= 1;
       if (k.has('KeyD') || k.has('ArrowRight')) r += 1;
-      if (k.has('KeyA') || k.has('ArrowLeft')) r += 1;
+      if (k.has('KeyA') || k.has('ArrowLeft')) r -= 1;
     }
     if (this.isMobile && this.isPlaying) {
       f += this.touchMove.y;

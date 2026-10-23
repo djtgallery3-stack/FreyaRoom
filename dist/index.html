@@ -8,8 +8,8 @@
     <title>Freya's Room — Interactive 3D</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%80%3C/text%3E%3C/svg%3E" />
     <link rel="preload" href="/models/room.glb" as="fetch" crossorigin />
-    <script type="module" crossorigin src="/assets/index-DGFFYzOU.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BGRGKxeb.css">
+    <script type="module" crossorigin src="/assets/index-Cs3PqY5h.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dy_gl8GP.css">
   </head>
   <body class="bg-[#1b1226] text-white antialiased overflow-hidden select-none">
     <canvas id="scene" class="fixed inset-0 h-full w-full outline-none" tabindex="-1" aria-label="Kamar Freya 3D"></canvas>
@@ -107,7 +107,7 @@
 
       <!-- Volume range slider -->
       <label class="sr-only" for="volume">Volume musik</label>
-      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.4" class="h-1 w-16 cursor-pointer accent-pink-300 sm:w-24" />
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.4" class="volume-slider h-8 w-20 py-2 sm:w-24 select-none touch-none" aria-label="Volume musik" />
 
       <!-- Track title pill -->
       <span class="hidden items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-xs font-medium text-pink-200 md:inline-flex" title="Lagu: Waiting Room (JKT48)">
@@ -139,6 +139,33 @@
         <button id="exit-fullscreen-btn" type="button" class="mt-3 hidden w-full rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white/90 transition hover:bg-white/20 active:scale-98 select-none">
           🚪 Keluar Fullscreen (Exit)
         </button>
+
+        <!-- Audio Settings Card (convenient for desktop & mobile) -->
+        <div id="menu-audio-settings" class="mt-5 rounded-2xl bg-black/35 p-3.5 ring-1 ring-white/10 text-left">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-pink-300 flex items-center gap-1.5">
+              <span>🎵</span> Pengaturan Audio
+            </span>
+            <span id="menu-volume-pct" class="font-mono text-xs font-bold text-white/80">40%</span>
+          </div>
+
+          <!-- Volume Controls row -->
+          <div class="flex items-center gap-2">
+            <button id="menu-play-btn" type="button" class="btn-icon h-9 w-9 min-h-[36px] min-w-[36px] text-xs" aria-label="Putar / Jeda Musik" title="Putar / Jeda Musik">
+              <span id="menu-play-icon">⏸️</span>
+            </button>
+            <button id="menu-mute-btn" type="button" class="btn-icon h-9 w-9 min-h-[36px] min-w-[36px] text-xs" aria-label="Bisukan Musik" title="Bisukan Musik">
+              <span id="menu-mute-icon">🔊</span>
+            </button>
+            <button id="menu-vol-down" type="button" class="btn-icon h-9 w-9 min-h-[36px] min-w-[36px] text-sm font-bold" aria-label="Kecilkan Volume" title="Kecilkan Volume">
+              −
+            </button>
+            <input id="menu-volume" type="range" min="0" max="1" step="0.05" value="0.4" class="volume-slider flex-1 h-8 py-2 select-none touch-none" aria-label="Volume Musik" />
+            <button id="menu-vol-up" type="button" class="btn-icon h-9 w-9 min-h-[36px] min-w-[36px] text-sm font-bold" aria-label="Besarkan Volume" title="Besarkan Volume">
+              +
+            </button>
+          </div>
+        </div>
         <dl id="desktop-instructions" class="mt-6 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-left text-xs text-white/60">
           <dt><kbd class="kbd">W</kbd><kbd class="kbd">A</kbd><kbd class="kbd">S</kbd><kbd class="kbd">D</kbd> / panah</dt><dd>Berjalan (tahan <kbd class="kbd">Shift</kbd> untuk lari)</dd>
           <dt>Mouse</dt><dd>Melihat sekeliling</dd>
