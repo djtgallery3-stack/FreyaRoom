@@ -82,6 +82,7 @@ try {
       world,
       renderer,
       audio,
+      visitorCounter,
       lighting: world.lighting,
       toggleLighting,
       activate,

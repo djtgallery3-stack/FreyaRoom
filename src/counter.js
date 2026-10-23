@@ -1,16 +1,17 @@
 /**
  * Real-time aesthetic Visitor Counter widget for Freya's Room.
- * Uses a resilient strategy:
- * 1. Queries live global hit badge from komarev / serverless endpoint.
- * 2. Seamlessly falls back to localStorage with baseline 1 visit.
- * 3. Animates number roll-up with Indonesian locale formatting.
+ * Uses a resilient multi-tier strategy:
+ * 1. Checks and increments local baseline.
+ * 2. Fetches real-time global counter from /api/counter (hits.sh / laobi backends).
+ * 3. Never decreases (strictly monotonic: Math.max(local, remote)).
+ * 4. Animates number roll-up with Indonesian locale formatting.
  */
 export class VisitorCounter {
   constructor({ counterEl, badgeEl } = {}) {
     this.counterEl = counterEl ?? document.getElementById('visitor-count');
     this.badgeEl = badgeEl ?? document.getElementById('visitor-counter');
-    this.storageKey = 'freya_room_visitor_count_v2';
-    this.sessionKey = 'freya_room_session_visited_v2';
+    this.storageKey = 'freya_room_visitor_count_v3';
+    this.sessionKey = 'freya_room_session_visited_v3';
     this.fallbackBase = 1;
   }
 
@@ -22,50 +23,64 @@ export class VisitorCounter {
 
     const count = await this.#fetchAndIncrement();
     this.#animateCount(count);
+    return count;
   }
 
   async #fetchAndIncrement() {
-    // 1. Local baseline starting purely from 1
-    let stored = parseInt(localStorage.getItem(this.storageKey) || '0', 10);
-    if (!stored || stored < this.fallbackBase) {
-      stored = this.fallbackBase;
+    // 1. Read existing local storage count & increment
+    let localStored = parseInt(localStorage.getItem(this.storageKey) || '0', 10);
+    if (!localStored || isNaN(localStored)) {
+      localStored = 1;
+    } else {
+      localStored += 1;
     }
+    localStorage.setItem(this.storageKey, String(localStored));
 
-    // Increment once per browser session
-    const hasVisitedThisSession = sessionStorage.getItem(this.sessionKey);
-    if (!hasVisitedThisSession) {
-      sessionStorage.setItem(this.sessionKey, '1');
-      if (!localStorage.getItem(this.storageKey)) {
-        stored = 1;
-      } else {
-        stored += 1;
-      }
-      localStorage.setItem(this.storageKey, String(stored));
-    }
-
-    // 2. Attempt remote live hit counter / API
+    // 2. Query remote global live counter API (serverless endpoint)
     try {
       const res = await fetch('/api/counter', {
-        signal: AbortSignal.timeout(2000),
+        signal: AbortSignal.timeout(3000),
       });
       if (res.ok) {
         const data = await res.json();
-        if (typeof data.visitors === 'number' && data.visitors >= 1) {
-          localStorage.setItem(this.storageKey, String(data.visitors));
-          return data.visitors;
+        if (typeof data.visitors === 'number' && data.visitors > 0) {
+          const finalCount = Math.max(localStored, data.visitors);
+          localStorage.setItem(this.storageKey, String(finalCount));
+          return finalCount;
         }
       }
     } catch {
-      // Offline / serverless unavailable: use stored count
+      // Serverless endpoint unavailable (e.g. offline or local preview)
     }
 
-    return stored;
+    // 3. Direct client-side hit check fallback
+    try {
+      const resDirect = await fetch('https://hits.sh/djtgallery3-freya-room.vercel.app.svg', {
+        signal: AbortSignal.timeout(3000),
+      });
+      if (resDirect.ok) {
+        const text = await resDirect.text();
+        const match = text.match(/hits:\s*([0-9]+)/i);
+        if (match && match[1]) {
+          const num = parseInt(match[1], 10);
+          if (!isNaN(num) && num > 0) {
+            const finalCount = Math.max(localStored, num);
+            localStorage.setItem(this.storageKey, String(finalCount));
+            return finalCount;
+          }
+        }
+      }
+    } catch {
+      // offline / blocked
+    }
+
+    return localStored;
   }
 
   #animateCount(target) {
     if (!this.counterEl) return;
-    const start = Math.max(0, target - 24);
-    const duration = 900; // ms
+    const start = Math.max(1, target - 12);
+    const duration = 500; // ms
     const startTime = performance.now();
 
     const update = (now) => {
@@ -73,8 +88,13 @@ export class VisitorCounter {
       const ease = 1 - Math.pow(1 - progress, 3); // easeOutCubic
       const current = Math.round(start + (target - start) * ease);
       this.counterEl.textContent = current.toLocaleString('id-ID');
-      if (progress < 1) requestAnimationFrame(update);
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        this.counterEl.textContent = target.toLocaleString('id-ID');
+      }
     };
+    this.counterEl.textContent = start.toLocaleString('id-ID');
     requestAnimationFrame(update);
   }
 }
