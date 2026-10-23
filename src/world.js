@@ -62,8 +62,17 @@ export async function loadWorld(scene, renderer, onProgress) {
       }
       // Give the desk lamp shade a warm ambient glow
       if (o.name === 'Lamp_S') {
-        m.emissive = new THREE.Color(0xffd48a);
-        m.emissiveIntensity = 2.0;
+        m.emissive = new THREE.Color(0xffaa44);
+        m.emissiveIntensity = 2.5;
+      }
+      // Tune room ceiling and walls to match moody movie reels
+      if (m?.name === 'Mat_RoomCeiling') {
+        m.color = new THREE.Color(0x524c4e);
+        m.roughness = 0.95;
+      }
+      if (m?.name === 'Mat_FloralWallpaper') {
+        m.color = new THREE.Color(0xb0a094);
+        m.roughness = 0.85;
       }
     }
   });

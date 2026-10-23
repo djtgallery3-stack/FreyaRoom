@@ -26,11 +26,11 @@ export class LightingController {
 
   #initLights() {
     // 1. Hemisphere Light (Sky vs Ground bounce) - lowered for rich ambient contrast
-    this.hemi = new THREE.HemisphereLight(0xffeedb, 0x452e2a, 0.22);
+    this.hemi = new THREE.HemisphereLight(0xa8998d, 0x241d1a, 0.10);
     this.scene.add(this.hemi);
 
-    // 2. Window Directional Light (Moonlight / Daylight beam)
-    this.moon = new THREE.DirectionalLight(0xfff4e6, 0.85);
+    // 2. Window Directional Light (Soft warm beam, non-blinding)
+    this.moon = new THREE.DirectionalLight(0xffecd6, 0.12);
     this.moon.position.copy(bl(4.5, 2.95, 2.4));
     this.moon.target.position.copy(bl(1.2, 2.5, 0));
     this.moon.castShadow = true;
@@ -40,37 +40,37 @@ export class LightingController {
     this.moon.shadow.normalBias = 0.02;
     this.scene.add(this.moon, this.moon.target);
 
-    // 3. Main Ceiling Room Light (balanced to prevent flat wash)
-    this.ceiling = new THREE.PointLight(0xffebd6, 2.2, 7, 1.6);
+    // 3. Main Ceiling Room Light (subtle fill; ceiling is dark/moody in movie reels)
+    this.ceiling = new THREE.PointLight(0xffebd6, 0.05, 5, 2.0);
     this.ceiling.position.copy(bl(0.0, 1.3, 2.4));
     this.scene.add(this.ceiling);
 
-    // 4. Desk Lamp (Lamp_S at [0.48, 1.15, -3.68] - warm amber/golden glow with soft shadows)
-    this.deskLamp = new THREE.PointLight(0xffa856, 5.2, 4.5, 1.6);
+    // 4. Desk Lamp (Lamp_S at [0.48, 1.15, -3.68] - hero warm amber/golden glow matching movie reels)
+    this.deskLamp = new THREE.PointLight(0xff9e38, 4.8, 5.0, 1.7);
     this.deskLamp.position.set(0.48, 1.15, -3.68);
     this.deskLamp.castShadow = true;
     this.deskLamp.shadow.mapSize.set(1024, 1024);
     this.deskLamp.shadow.bias = -0.002;
     this.scene.add(this.deskLamp);
 
-    // 5. Bedside Sconce
-    this.bedsideSconce = new THREE.PointLight(0xffb0cc, 2.8, 4, 1.6);
+    // 5. Bedside Sconce (soft accent)
+    this.bedsideSconce = new THREE.PointLight(0xffa8c0, 0.35, 3.5, 1.8);
     this.bedsideSconce.position.copy(bl(1.8, 2.3, 1.35));
     this.scene.add(this.bedsideSconce);
 
-    // 6. Shelf Fill Light
-    this.shelfFill = new THREE.PointLight(0xffe0b0, 2.2, 4, 1.6);
+    // 6. Shelf Fill Light (soft warm accent)
+    this.shelfFill = new THREE.PointLight(0xffd8a0, 0.25, 3.5, 1.8);
     this.shelfFill.position.copy(bl(-1.4, 2.85, 1.75));
     this.scene.add(this.shelfFill);
 
-    // 7. Desk Spotlight (Warm accent focused on desk workspace)
-    this.deskSpot = new THREE.SpotLight(0xfffae8, 5.5, 5, Math.PI / 4, 0.6, 1.5);
+    // 7. Desk Spotlight (Warm subtle accent focused on desk workspace)
+    this.deskSpot = new THREE.SpotLight(0xffa44a, 1.2, 4.5, Math.PI / 4, 0.7, 1.8);
     this.deskSpot.position.set(0.48, 1.25, -3.68);
     this.deskSpot.target.position.set(0.12, 0.72, -3.70);
     this.scene.add(this.deskSpot, this.deskSpot.target);
 
     // 8. Shelf Neon LED Strip (Moody Night Accent)
-    this.shelfLed = new THREE.PointLight(0xff90b8, 0.6, 3.5, 1.5);
+    this.shelfLed = new THREE.PointLight(0xff90b8, 0.3, 3.5, 1.5);
     this.shelfLed.position.copy(bl(-1.2, 2.9, 1.85));
     this.scene.add(this.shelfLed);
 
@@ -78,23 +78,23 @@ export class LightingController {
     this.targets = {
       hemiSky: new THREE.Color(),
       hemiGround: new THREE.Color(),
-      hemiIntensity: 0.22,
+      hemiIntensity: 0.10,
       moonColor: new THREE.Color(),
-      moonIntensity: 0.85,
+      moonIntensity: 0.12,
       ceilingColor: new THREE.Color(),
-      ceilingIntensity: 2.2,
+      ceilingIntensity: 0.05,
       deskLampColor: new THREE.Color(),
-      deskLampIntensity: 5.2,
+      deskLampIntensity: 4.8,
       bedsideSconceColor: new THREE.Color(),
-      bedsideSconceIntensity: 2.8,
+      bedsideSconceIntensity: 0.35,
       shelfFillColor: new THREE.Color(),
-      shelfFillIntensity: 2.2,
-      deskSpotIntensity: 5.5,
+      shelfFillIntensity: 0.25,
+      deskSpotIntensity: 1.2,
       shelfLedColor: new THREE.Color(),
-      shelfLedIntensity: 0.6,
+      shelfLedIntensity: 0.3,
       bgColor: new THREE.Color(),
-      envIntensity: 0.22,
-      toneExp: 1.15,
+      envIntensity: 0.04,
+      toneExp: 0.85,
     };
   }
 
@@ -102,33 +102,33 @@ export class LightingController {
     const t = this.targets;
     if (!this.isNight) {
       // --- Mode Terang (Warm Movie Reels Aesthetic) ---
-      t.hemiSky.setHex(0xffeedb);
-      t.hemiGround.setHex(0x452e2a);
-      t.hemiIntensity = 0.22;
+      t.hemiSky.setHex(0xa8998d);
+      t.hemiGround.setHex(0x241d1a);
+      t.hemiIntensity = 0.10;
 
-      t.moonColor.setHex(0xfff4e6); // Warm sunlight beam
-      t.moonIntensity = 0.85;
+      t.moonColor.setHex(0xffecd6); // Soft warm beam
+      t.moonIntensity = 0.12;
 
       t.ceilingColor.setHex(0xffebd6);
-      t.ceilingIntensity = 2.2;
+      t.ceilingIntensity = 0.05;
 
-      t.deskLampColor.setHex(0xffa856); // Warm amber desk glow
-      t.deskLampIntensity = 5.2;
+      t.deskLampColor.setHex(0xff9e38); // Warm amber desk glow
+      t.deskLampIntensity = 4.8;
 
-      t.bedsideSconceColor.setHex(0xffb0cc);
-      t.bedsideSconceIntensity = 2.8;
+      t.bedsideSconceColor.setHex(0xffa8c0);
+      t.bedsideSconceIntensity = 0.35;
 
-      t.shelfFillColor.setHex(0xffe0b0);
-      t.shelfFillIntensity = 2.2;
+      t.shelfFillColor.setHex(0xffd8a0);
+      t.shelfFillIntensity = 0.25;
 
-      t.deskSpotIntensity = 5.5;
+      t.deskSpotIntensity = 1.2;
 
       t.shelfLedColor.setHex(0xff90b8);
-      t.shelfLedIntensity = 0.6;
+      t.shelfLedIntensity = 0.3;
 
-      t.bgColor.setHex(0x1e1528);
-      t.envIntensity = 0.22;
-      t.toneExp = 1.15;
+      t.bgColor.setHex(0x181216);
+      t.envIntensity = 0.04;
+      t.toneExp = 0.85;
     } else {
       // --- Mode Malam Temaram (Moody Night) ---
       t.hemiSky.setHex(0x151d3b);
