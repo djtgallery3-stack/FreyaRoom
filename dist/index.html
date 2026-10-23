@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Jelajahi kamar tidur Freya secara 3D first-person: buka 6 Kotak Kenangan, lihat pigura foto, dan putar boneka Freya." />
+    <meta name="theme-color" content="#1b1226" />
+    <title>Freya's Room — Interactive 3D</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%80%3C/text%3E%3C/svg%3E" />
+    <link rel="preload" href="/models/room.glb" as="fetch" crossorigin />
+    <script type="module" crossorigin src="/assets/index-GIDb5ezB.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DL4NYble.css">
+  </head>
+  <body class="bg-[#1b1226] text-white antialiased overflow-hidden select-none">
+    <canvas id="scene" class="fixed inset-0 h-full w-full outline-none" tabindex="-1" aria-label="Kamar Freya 3D"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" class="pointer-events-none fixed inset-0 hidden">
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" aria-hidden="true">
+        <div id="reticle" class="h-2 w-2 rounded-full bg-white/80 ring-2 ring-black/30 transition-all duration-150"></div>
+      </div>
+      <p
+        id="prompt"
+        role="status"
+        aria-live="polite"
+        class="absolute left-1/2 top-[56%] -translate-x-1/2 rounded-full bg-black/55 px-4 py-2 text-sm font-medium opacity-0 backdrop-blur transition-opacity duration-150"
+      ></p>
+      <p class="absolute bottom-4 left-4 hidden rounded-lg bg-black/40 px-3 py-2 text-xs leading-relaxed text-white/80 backdrop-blur sm:block">
+        <kbd class="kbd">W</kbd><kbd class="kbd">A</kbd><kbd class="kbd">S</kbd><kbd class="kbd">D</kbd> jalan ·
+        <kbd class="kbd">Shift</kbd> lari · <kbd class="kbd">E</kbd>/klik interaksi ·
+        <kbd class="kbd">L</kbd> saklar lampu · <kbd class="kbd">P</kbd> musik · <kbd class="kbd">M</kbd> bisukan · <kbd class="kbd">Esc</kbd> lepas kursor
+      </p>
+    </div>
+
+    <!-- Visitor Counter (aesthetic real-time badge) -->
+    <div id="visitor-counter" class="fixed left-4 top-4 z-30 hidden items-center gap-2.5 rounded-full bg-black/45 px-3.5 py-2 backdrop-blur ring-1 ring-white/10 select-none">
+      <span class="relative flex h-2 w-2" aria-hidden="true">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+      </span>
+      <span class="text-xs font-medium text-white/80">Kunjungan</span>
+      <span class="h-3 w-px bg-white/20" aria-hidden="true"></span>
+      <span id="visitor-count" class="font-mono text-xs font-bold tracking-wider text-pink-300">1.428</span>
+    </div>
+
+    <!-- Controls Bar: Light Mood Toggle + BGM Audio Controls -->
+    <div id="controls-bar" class="fixed right-4 top-4 z-30 hidden items-center gap-2 rounded-full bg-black/45 p-1.5 backdrop-blur ring-1 ring-white/10 sm:gap-2.5 sm:px-3 sm:py-2">
+      <!-- Lighting Mood Toggle Button -->
+      <button id="light-toggle" type="button" class="btn-icon" aria-label="Ganti mode lampu: Mode Terang" title="Mode Lampu [L]">
+        <!-- Sun icon (shown in Day mode) -->
+        <svg id="icon-sun" viewBox="0 0 24 24" class="h-5 w-5 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <!-- Moon icon (shown in Night mode) -->
+        <svg id="icon-moon" viewBox="0 0 24 24" class="hidden h-5 w-5 text-sky-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/><path d="M19 3v4M21 5h-4"/>
+        </svg>
+      </button>
+
+      <div class="h-4 w-px bg-white/20" aria-hidden="true"></div>
+
+      <!-- Play / Pause BGM -->
+      <button id="play-pause" type="button" class="btn-icon" aria-label="Jeda musik" title="Putar / Jeda Musik [P]">
+        <!-- Pause icon -->
+        <svg id="icon-pause" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>
+        </svg>
+        <!-- Play icon -->
+        <svg id="icon-play" viewBox="0 0 24 24" class="hidden h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="6 3 20 12 6 21 6 3"/>
+        </svg>
+      </button>
+
+      <!-- Mute / Unmute -->
+      <button id="mute" type="button" class="btn-icon" aria-label="Bisukan musik" aria-pressed="false" title="Bisukan [M]">
+        <svg id="icon-sound" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+        <svg id="icon-muted" viewBox="0 0 24 24" class="hidden h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
+      </button>
+
+      <!-- Volume range slider -->
+      <label class="sr-only" for="volume">Volume musik</label>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="0.4" class="h-1 w-16 cursor-pointer accent-pink-300 sm:w-24" />
+
+      <!-- Track title pill -->
+      <span class="hidden items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-xs font-medium text-pink-200 md:inline-flex" title="Lagu: Waiting Room (JKT48)">
+        <span class="inline-block h-1.5 w-1.5 rounded-full bg-pink-300 animate-pulse" aria-hidden="true"></span>
+        <span class="truncate max-w-[110px]">Waiting Room</span>
+      </span>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading" class="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-[#1b1226]" role="status" aria-live="polite">
+      <p class="font-display text-2xl tracking-wide text-pink-200">Freya's Room</p>
+      <div class="h-1.5 w-64 overflow-hidden rounded-full bg-white/10">
+        <div id="loading-bar" class="h-full w-0 rounded-full bg-pink-300 transition-[width] duration-200"></div>
+      </div>
+      <p id="loading-text" class="text-sm text-white/60">Menyiapkan kamar… 0%</p>
+    </div>
+
+    <!-- Start / pause overlay -->
+    <div id="start" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/60 p-6 backdrop-blur-sm">
+      <div class="max-w-md rounded-3xl bg-[#2a1b3a]/95 p-8 text-center shadow-2xl ring-1 ring-white/10">
+        <p class="text-sm uppercase tracking-[0.3em] text-pink-300">Selamat datang di</p>
+        <h1 class="mt-1 font-display text-4xl text-white">Kamar Freya</h1>
+        <p class="mt-4 text-sm leading-relaxed text-white/70">
+          Jelajahi kamarnya, buka 6 Kotak Kenangan, lihat pigura foto di dinding, dan putar boneka Freya 360°.
+        </p>
+        <button id="start-btn" type="button" class="mt-6 w-full rounded-full bg-pink-300 px-6 py-3 font-semibold text-[#2a1b3a] transition hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+          <span id="start-label">Klik untuk masuk</span>
+        </button>
+        <dl class="mt-6 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-left text-xs text-white/60">
+          <dt><kbd class="kbd">W</kbd><kbd class="kbd">A</kbd><kbd class="kbd">S</kbd><kbd class="kbd">D</kbd> / panah</dt><dd>Berjalan (tahan <kbd class="kbd">Shift</kbd> untuk lari)</dd>
+          <dt>Mouse</dt><dd>Melihat sekeliling</dd>
+          <dt><kbd class="kbd">E</kbd> / klik</dt><dd>Buka kotak, foto, boneka, atau saklar</dd>
+          <dt><kbd class="kbd">L</kbd></dt><dd>Ganti mode suasana lampu (Terang / Malam)</dd>
+          <dt><kbd class="kbd">P</kbd> / <kbd class="kbd">M</kbd></dt><dd>Putar/jeda / bisukan musik</dd>
+          <dt><kbd class="kbd">Esc</kbd></dt><dd>Lepas kursor / tutup jendela</dd>
+        </dl>
+        <p id="start-note" class="mt-5 hidden text-xs text-amber-200/80">
+          Pengalaman ini dirancang untuk desktop dengan keyboard &amp; mouse.
+        </p>
+      </div>
+    </div>
+
+    <!-- Memory box gallery -->
+    <div id="gallery" class="modal" role="dialog" aria-modal="true" aria-labelledby="gallery-title" hidden>
+      <div class="modal-panel max-w-6xl">
+        <header class="flex items-start justify-between gap-4 border-b border-white/10 px-6 py-4">
+          <div>
+            <p id="gallery-eyebrow" class="text-xs uppercase tracking-[0.25em] text-pink-300"></p>
+            <h2 id="gallery-title" class="font-display text-2xl"></h2>
+            <p id="gallery-count" class="text-xs text-white/50"></p>
+          </div>
+          <button type="button" class="btn-icon" data-close aria-label="Tutup galeri">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </header>
+        <ul id="gallery-grid" class="grid grid-cols-2 gap-3 overflow-y-auto p-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"></ul>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="modal z-[70]" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
+      <figure class="relative flex h-full max-h-full w-full max-w-5xl flex-col items-center justify-center gap-3 p-4">
+        <img id="lightbox-img" alt="" class="min-h-0 max-w-full flex-1 rounded-lg object-contain shadow-2xl" decoding="async" />
+        <figcaption class="text-center">
+          <p id="lightbox-title" class="font-display text-xl"></p>
+          <p id="lightbox-note" class="mx-auto mt-1 max-w-xl text-sm text-white/70"></p>
+          <p id="lightbox-pos" class="mt-1 text-xs text-white/40"></p>
+        </figcaption>
+        <button type="button" class="btn-icon absolute right-4 top-4" data-close aria-label="Tutup foto">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+        <button type="button" id="lb-prev" class="btn-icon absolute left-4 top-1/2 -translate-y-1/2" aria-label="Foto sebelumnya">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button type="button" id="lb-next" class="btn-icon absolute right-4 top-1/2 -translate-y-1/2" aria-label="Foto berikutnya">
+          <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </figure>
+    </div>
+
+    <!-- 3D orbit viewer -->
+    <div id="orbit" class="modal z-[60]" role="dialog" aria-modal="true" aria-labelledby="orbit-title" hidden>
+      <div class="modal-panel max-w-4xl">
+        <header class="flex items-start justify-between gap-4 border-b border-white/10 px-6 py-4">
+          <div>
+            <p class="text-xs uppercase tracking-[0.25em] text-pink-300">Model 3D</p>
+            <h2 id="orbit-title" class="font-display text-2xl"></h2>
+          </div>
+          <button type="button" class="btn-icon" data-close aria-label="Tutup penampil 3D">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </header>
+        <div class="relative min-h-0 flex-1">
+          <canvas id="orbit-canvas" class="h-full min-h-[50vh] w-full cursor-grab touch-none active:cursor-grabbing" tabindex="0" aria-label="Model 3D boneka Freya — seret untuk memutar, scroll untuk zoom"></canvas>
+          <p class="pointer-events-none absolute inset-x-0 bottom-3 text-center text-xs text-white/60">Seret untuk memutar · scroll untuk zoom · klik kanan geser</p>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,1256 @@
+{
+ "boxes": [
+  {
+   "n": 1,
+   "slug": "Box_AcademyJKT48",
+   "label": "Kotak 1: Academy JKT48",
+   "name": "Academy JKT48",
+   "color": "#ff8fb8",
+   "photos": [
+    {
+     "id": "01",
+     "title": "Trainee Green Tee Nostalgia",
+     "category": "momen trainee",
+     "note": "Momen awal trainee dengan kaos hijau khas akademi, tatapan lembut dan senyum polos masa debut.",
+     "full": "/photos/box1/01.webp",
+     "thumb": "/photos/box1/01-t.webp"
+    },
+    {
+     "id": "02",
+     "title": "Infectious Backstage Laughter",
+     "category": "awal debut",
+     "note": "Candid tawa lepas khas Freya saat persiapan di backstage dengan rol rambut, menangkap keceriaan alami.",
+     "full": "/photos/box1/02.webp",
+     "thumb": "/photos/box1/02-t.webp"
+    },
+    {
+     "id": "03",
+     "title": "Pajama Drive Plaid Uniform",
+     "category": "seragam akademi",
+     "note": "Pose panggung berlutut menoleh ke kamera dalam balutan seragam kotak-kotak merah akademi dengan komposisi dinamis.",
+     "full": "/photos/box1/03.webp",
+     "thumb": "/photos/box1/03-t.webp"
+    },
+    {
+     "id": "04",
+     "title": "Lavender Dino Hoodie Pout",
+     "category": "momen trainee",
+     "note": "Pose ikonik mengenakan hoodie onesie lavender dengan ekspresi bibir mengerucut (pout) yang sangat digemari fans.",
+     "full": "/photos/box1/04.webp",
+     "thumb": "/photos/box1/04-t.webp"
+    },
+    {
+     "id": "05",
+     "title": "Classic Studio Debut Portrait",
+     "category": "awal debut",
+     "note": "Portrait studio beresolusi tinggi (4092x6132) dengan gestur membenahi rambut dan pencahayaan lembut.",
+     "full": "/photos/box1/05.webp",
+     "thumb": "/photos/box1/05-t.webp"
+    },
+    {
+     "id": "06",
+     "title": "Sousenkyo Campaign Speech",
+     "category": "momen trainee",
+     "note": "Pidato kampanye Pemilihan Member Single Original dengan selempang di atas panggung.",
+     "full": "/photos/box1/06.webp",
+     "thumb": "/photos/box1/06-t.webp"
+    },
+    {
+     "id": "07",
+     "title": "Sailor Academy Cheer",
+     "category": "seragam akademi",
+     "note": "Senyum ceria dengan kepalan tangan semangat dalam kostum sailor biru-merah putih akademi.",
+     "full": "/photos/box1/07.webp",
+     "thumb": "/photos/box1/07-t.webp"
+    },
+    {
+     "id": "08",
+     "title": "Red Plaid Stage Vocals",
+     "category": "seragam akademi",
+     "note": "Bernyanyi penuh penghayatan dalam balutan seragam kotak-kotak merah ikonik masa akademi.",
+     "full": "/photos/box1/08.webp",
+     "thumb": "/photos/box1/08-t.webp"
+    },
+    {
+     "id": "09",
+     "title": "Sweet Lime Trainee Smile",
+     "category": "momen trainee",
+     "note": "Senyum manis memiringkan kepala dengan kaos hijau trainee JKT48 Akademi.",
+     "full": "/photos/box1/09.webp",
+     "thumb": "/photos/box1/09-t.webp"
+    },
+    {
+     "id": "10",
+     "title": "Backstage Green Tartan Pose",
+     "category": "awal debut",
+     "note": "Pose manis di backstage mengenakan kaos hitam lengan panjang dan rok tartan hijau.",
+     "full": "/photos/box1/10.webp",
+     "thumb": "/photos/box1/10-t.webp"
+    },
+    {
+     "id": "11",
+     "title": "Trainee Hand Wave Smile",
+     "category": "momen trainee",
+     "note": "Lambaian tangan hangat menyapa penggemar di awal langkah panggung teater.",
+     "full": "/photos/box1/11.webp",
+     "thumb": "/photos/box1/11-t.webp"
+    },
+    {
+     "id": "12",
+     "title": "Stage Mic Passion",
+     "category": "seragam akademi",
+     "note": "Fokus bernyanyi memegang mikrofon dengan tatapan penuh determinasi.",
+     "full": "/photos/box1/12.webp",
+     "thumb": "/photos/box1/12-t.webp"
+    },
+    {
+     "id": "13",
+     "title": "Playful Dino Hoodie Wink",
+     "category": "candid kasual",
+     "note": "Kedipan mata jenaka berbalut hoodie dinosaurus lavender.",
+     "full": "/photos/box1/13.webp",
+     "thumb": "/photos/box1/13-t.webp"
+    },
+    {
+     "id": "14",
+     "title": "Lavender Dino Cute Gaze",
+     "category": "candid kasual",
+     "note": "Tatapan polos menggemaskan berhoodie dino lavender.",
+     "full": "/photos/box1/14.webp",
+     "thumb": "/photos/box1/14-t.webp"
+    },
+    {
+     "id": "15",
+     "title": "Classic Trainee Salute",
+     "category": "momen trainee",
+     "note": "Pose hormat khas trainee menandai tekad kuat seorang idola baru.",
+     "full": "/photos/box1/15.webp",
+     "thumb": "/photos/box1/15-t.webp"
+    },
+    {
+     "id": "16",
+     "title": "Trainee Stage Radiance",
+     "category": "momen trainee",
+     "note": "Senyum panggung trainee berseri penuh pesona alami masa awal karier.",
+     "full": "/photos/box1/16.webp",
+     "thumb": "/photos/box1/16-t.webp"
+    },
+    {
+     "id": "17",
+     "title": "Campaign Speech Determination",
+     "category": "momen trainee",
+     "note": "Tekad membara saat menyampaikan orasi kampanye pemilihan member.",
+     "full": "/photos/box1/17.webp",
+     "thumb": "/photos/box1/17-t.webp"
+    },
+    {
+     "id": "18",
+     "title": "Pajama Drive Vibrant Energy",
+     "category": "seragam akademi",
+     "note": "Energi keceriaan membuncah dalam balutan seifuku kotak-kotak merah.",
+     "full": "/photos/box1/18.webp",
+     "thumb": "/photos/box1/18-t.webp"
+    },
+    {
+     "id": "19",
+     "title": "Stage Vocal Focus",
+     "category": "seragam akademi",
+     "note": "Penghayatan vokal mendalam dengan mikrofon di bawah lampu sorot teater.",
+     "full": "/photos/box1/19.webp",
+     "thumb": "/photos/box1/19-t.webp"
+    },
+    {
+     "id": "20",
+     "title": "Sweet Trainee Smile",
+     "category": "candid kasual",
+     "note": "Senyum manis hangat merefleksikan keceriaan masa remaja.",
+     "full": "/photos/box1/20.webp",
+     "thumb": "/photos/box1/20-t.webp"
+    },
+    {
+     "id": "21",
+     "title": "Trainee Green Tee Radiance",
+     "category": "momen trainee",
+     "note": "Pancaran pesona natural dengan kaos hijau trainee akademi.",
+     "full": "/photos/box1/21.webp",
+     "thumb": "/photos/box1/21-t.webp"
+    },
+    {
+     "id": "22",
+     "title": "Side Ponytail Debut Climax",
+     "category": "awal debut",
+     "note": "Potret anggun kuncir samping menutup lembaran akademi dengan indah.",
+     "full": "/photos/box1/22.webp",
+     "thumb": "/photos/box1/22-t.webp"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "slug": "Box_NewEra",
+   "label": "Kotak 2: New Era",
+   "name": "New Era",
+   "color": "#8ec5ff",
+   "photos": [
+    {
+     "id": "01",
+     "title": "New Era Debut Uniform",
+     "category": "semangat baru",
+     "note": "Seragam resmi pinstripe abu-abu putih debut JKT48 New Era pasca restrukturisasi, gestur percaya diri.",
+     "full": "/photos/box2/01.webp",
+     "thumb": "/photos/box2/01-t.webp"
+    },
+    {
+     "id": "02",
+     "title": "Sparkling Teal Stage Star",
+     "category": "aura bintang baru",
+     "note": "Gaun panggung toska keemasan bergliter, melambaikan tangan dengan senyum riang menyapa penonton.",
+     "full": "/photos/box2/02.webp",
+     "thumb": "/photos/box2/02-t.webp"
+    },
+    {
+     "id": "03",
+     "title": "Future Horizon Point",
+     "category": "semangat baru",
+     "note": "Seragam sekolah rompi kuning resolusi tinggi (3029x4551), telunjuk mengarah ke atas menandakan tekad menuju puncak.",
+     "full": "/photos/box2/03.webp",
+     "thumb": "/photos/box2/03-t.webp"
+    },
+    {
+     "id": "04",
+     "title": "Cinematic Seifuku Stage Glow",
+     "category": "formasi baru",
+     "note": "Profil samping sinematik dalam balutan seifuku sailor navy dengan latar pendaran tata lampu panggung spektakuler.",
+     "full": "/photos/box2/04.webp",
+     "thumb": "/photos/box2/04-t.webp"
+    },
+    {
+     "id": "05",
+     "title": "Summer Festival Double Peace",
+     "category": "semangat baru",
+     "note": "Dress floral merah di festival luar ruangan, pose double peace sign dengan aura ceria memikat.",
+     "full": "/photos/box2/05.webp",
+     "thumb": "/photos/box2/05-t.webp"
+    },
+    {
+     "id": "06",
+     "title": "Pinstripe Grace Portrait",
+     "category": "formasi baru",
+     "note": "Berdiri anggun memegang mikrofon dalam seragam pinstripe abu-abu putih khas New Era.",
+     "full": "/photos/box2/06.webp",
+     "thumb": "/photos/box2/06-t.webp"
+    },
+    {
+     "id": "07",
+     "title": "Golden Vest Stage Glow",
+     "category": "semangat baru",
+     "note": "Tatapan ceria penuh semangat mengenakan seragam sekolah rompi kuning dan rok tartan.",
+     "full": "/photos/box2/07.webp",
+     "thumb": "/photos/box2/07-t.webp"
+    },
+    {
+     "id": "08",
+     "title": "New Era #08",
+     "category": "New Era",
+     "note": "",
+     "full": "/photos/box2/08.webp",
+     "thumb": "/photos/box2/08-t.webp"
+    },
+    {
+     "id": "09",
+     "title": "Fireworks Backdrop Confidence",
+     "category": "aura bintang baru",
+     "note": "Pose bersedekap penuh percaya diri dengan latar pendaran lampu kembang api panggung.",
+     "full": "/photos/box2/09.webp",
+     "thumb": "/photos/box2/09-t.webp"
+    },
+    {
+     "id": "10",
+     "title": "Crimson Floral Heart Gesture",
+     "category": "aura bintang baru",
+     "note": "Senyum hangat menyentuh dada dalam balutan dress floral merah dan latar bokeh cahaya.",
+     "full": "/photos/box2/10.webp",
+     "thumb": "/photos/box2/10-t.webp"
+    },
+    {
+     "id": "11",
+     "title": "Golden Stage Radiance",
+     "category": "semangat baru",
+     "note": "Pencahayaan keemasan menyorot senyuman memikat dalam koreografi era baru.",
+     "full": "/photos/box2/11.webp",
+     "thumb": "/photos/box2/11-t.webp"
+    },
+    {
+     "id": "12",
+     "title": "New Era #12",
+     "category": "New Era",
+     "note": "",
+     "full": "/photos/box2/12.webp",
+     "thumb": "/photos/box2/12-t.webp"
+    },
+    {
+     "id": "13",
+     "title": "Vibrant Seifuku Energy",
+     "category": "semangat baru",
+     "note": "Ekspresi cerah enerjik memancarkan pesona generasi baru JKT48.",
+     "full": "/photos/box2/13.webp",
+     "thumb": "/photos/box2/13-t.webp"
+    },
+    {
+     "id": "14",
+     "title": "New Era Confident Stride",
+     "category": "formasi baru",
+     "note": "Langkah mantap penuh percaya diri di panggung show New Era.",
+     "full": "/photos/box2/14.webp",
+     "thumb": "/photos/box2/14-t.webp"
+    },
+    {
+     "id": "15",
+     "title": "Charming Stage Smile",
+     "category": "aura bintang baru",
+     "note": "Senyuman karismatik memesona yang menegaskan posisi bintang di era baru.",
+     "full": "/photos/box2/15.webp",
+     "thumb": "/photos/box2/15-t.webp"
+    },
+    {
+     "id": "16",
+     "title": "New Era #16",
+     "category": "New Era",
+     "note": "",
+     "full": "/photos/box2/16.webp",
+     "thumb": "/photos/box2/16-t.webp"
+    },
+    {
+     "id": "17",
+     "title": "New Era #17",
+     "category": "New Era",
+     "note": "",
+     "full": "/photos/box2/17.webp",
+     "thumb": "/photos/box2/17-t.webp"
+    },
+    {
+     "id": "18",
+     "title": "New Era #18",
+     "category": "New Era",
+     "note": "",
+     "full": "/photos/box2/18.webp",
+     "thumb": "/photos/box2/18-t.webp"
+    },
+    {
+     "id": "19",
+     "title": "Dynamic Choreography Step",
+     "category": "semangat baru",
+     "note": "Gerak tari lincah penuh ketukan dan semangat membara generasi baru.",
+     "full": "/photos/box2/19.webp",
+     "thumb": "/photos/box2/19-t.webp"
+    },
+    {
+     "id": "20",
+     "title": "Star Aura Confidence",
+     "category": "aura bintang baru",
+     "note": "Kharisma bintang panggung New Era yang menyala terang.",
+     "full": "/photos/box2/20.webp",
+     "thumb": "/photos/box2/20-t.webp"
+    },
+    {
+     "id": "21",
+     "title": "Golden Yellow Vest Cheer",
+     "category": "semangat baru",
+     "note": "Senyum lebar berseri dengan rompi kuning cerah membakar panggung.",
+     "full": "/photos/box2/21.webp",
+     "thumb": "/photos/box2/21-t.webp"
+    },
+    {
+     "id": "22",
+     "title": "Stage Spotlight Elegance",
+     "category": "aura bintang baru",
+     "note": "Anggun mempesona di bawah sorotan lampu teater New Era.",
+     "full": "/photos/box2/22.webp",
+     "thumb": "/photos/box2/22-t.webp"
+    },
+    {
+     "id": "23",
+     "title": "Festival Joyful Wave",
+     "category": "semangat baru",
+     "note": "Lambaian tangan penuh sukacita menyapa barisan penonton festival.",
+     "full": "/photos/box2/23.webp",
+     "thumb": "/photos/box2/23-t.webp"
+    },
+    {
+     "id": "24",
+     "title": "New Era Grand Climax",
+     "category": "aura bintang baru",
+     "note": "Pesona paripurna New Era menegaskan lahirnya bintang masa depan.",
+     "full": "/photos/box2/24.webp",
+     "thumb": "/photos/box2/24-t.webp"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "slug": "Box_MemeQueen",
+   "label": "Kotak 3: Meme Queen",
+   "name": "Meme Queen",
+   "color": "#9be3a8",
+   "photos": [
+    {
+     "id": "01",
+     "title": "Meme Queen #01",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/01.webp",
+     "thumb": "/photos/box3/01-t.webp"
+    },
+    {
+     "id": "02",
+     "title": "The Crowned Meme Queen",
+     "category": "penobatan meme queen",
+     "note": "Foto legendaris momen bersejarah Freya memakai mahkota tiara dan gaun merah beludru hitam berbordir emas saat dinobatkan sebagai Meme Queen JKT48.",
+     "full": "/photos/box3/02.webp",
+     "thumb": "/photos/box3/02-t.webp"
+    },
+    {
+     "id": "03",
+     "title": "Meme Queen #03",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/03.webp",
+     "thumb": "/photos/box3/03-t.webp"
+    },
+    {
+     "id": "04",
+     "title": "Meme Queen #04",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/04.webp",
+     "thumb": "/photos/box3/04-t.webp"
+    },
+    {
+     "id": "05",
+     "title": "Meme Queen #05",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/05.webp",
+     "thumb": "/photos/box3/05-t.webp"
+    },
+    {
+     "id": "06",
+     "title": "Crossed Arms Dramatic Pout",
+     "category": "pose ikonik",
+     "note": "Kedua tangan bersedekap di dada dengan bibir mengerucut cemberut ala karakter anime tsundere dalam balutan gaun ruffles pink-hitam.",
+     "full": "/photos/box3/06.webp",
+     "thumb": "/photos/box3/06-t.webp"
+    },
+    {
+     "id": "07",
+     "title": "Senyum Tertekan ID Stare",
+     "category": "ekspresi viral netizen",
+     "note": "Close-up tatapan lurus datar tanpa kedip, template sempurna untuk meme senyum tertekan khas Freya.",
+     "full": "/photos/box3/07.webp",
+     "thumb": "/photos/box3/07-t.webp"
+    },
+    {
+     "id": "08",
+     "title": "Antigravity Mid-Air Leap",
+     "category": "momen aksi viral",
+     "note": "Momen aksi spektakuler Freya melompat tinggi di udara dengan kedua lutut terlipat sambil memegang mic, tampak melayang melawan gravitasi dalam balutan seragam atletik hijau-ungu.",
+     "full": "/photos/box3/08.webp",
+     "thumb": "/photos/box3/08-t.webp"
+    },
+    {
+     "id": "09",
+     "title": "Windblown Mint Laughter",
+     "category": "ekspresi candid lucu",
+     "note": "Ekspresi tawa lepas nan menggemaskan dengan rambut terhempas angin panggung dalam balutan busana ruffles mint pastel asimetris.",
+     "full": "/photos/box3/09.webp",
+     "thumb": "/photos/box3/09-t.webp"
+    },
+    {
+     "id": "10",
+     "title": "Dramatic Smartphone Reaction",
+     "category": "ekspresi candid lucu",
+     "note": "Pose memegang smartphone di depan dada sambil membuat gestur half-heart di pipi dengan senyum ceria dan ekspresi teatrikal yang menggemaskan.",
+     "full": "/photos/box3/10.webp",
+     "thumb": "/photos/box3/10-t.webp"
+    },
+    {
+     "id": "11",
+     "title": "Polkadot Big Overhead Heart",
+     "category": "pose ikonik",
+     "note": "Pose tangan membentuk hati besar di atas kepala dengan ekspresi ceria menggemaskan.",
+     "full": "/photos/box3/11.webp",
+     "thumb": "/photos/box3/11-t.webp"
+    },
+    {
+     "id": "12",
+     "title": "Classic Thinking Pout Meme",
+     "category": "ekspresi viral netizen",
+     "note": "Pose jari di dagu dengan tatapan melirik bingung yang menjadi stiker reaksi favorit fans.",
+     "full": "/photos/box3/12.webp",
+     "thumb": "/photos/box3/12-t.webp"
+    },
+    {
+     "id": "13",
+     "title": "Meme Queen #13",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/13.webp",
+     "thumb": "/photos/box3/13-t.webp"
+    },
+    {
+     "id": "14",
+     "title": "Double Cheek Poke Cute",
+     "category": "pose ikonik",
+     "note": "Pose telunjuk di kedua pipi dengan senyum ceria membuat hati penggemar luluh.",
+     "full": "/photos/box3/14.webp",
+     "thumb": "/photos/box3/14-t.webp"
+    },
+    {
+     "id": "15",
+     "title": "Surprised Reaction Face",
+     "category": "ekspresi viral netizen",
+     "note": "Ekspresi kaget dramatis yang menyempurnakan mahakarya Ratu Meme.",
+     "full": "/photos/box3/15.webp",
+     "thumb": "/photos/box3/15-t.webp"
+    },
+    {
+     "id": "16",
+     "title": "Meme Queen #16",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/16.webp",
+     "thumb": "/photos/box3/16-t.webp"
+    },
+    {
+     "id": "17",
+     "title": "Meme Queen #17",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/17.webp",
+     "thumb": "/photos/box3/17-t.webp"
+    },
+    {
+     "id": "18",
+     "title": "Quirky Double Peace",
+     "category": "pose ikonik",
+     "note": "Double peace santai dengan ekspresi muka jahil yang super kocak.",
+     "full": "/photos/box3/18.webp",
+     "thumb": "/photos/box3/18-t.webp"
+    },
+    {
+     "id": "19",
+     "title": "Playful Pout Expression",
+     "category": "candid lucu",
+     "note": "Cemberut manja jenaka yang langsung viral di lini masa penggemar.",
+     "full": "/photos/box3/19.webp",
+     "thumb": "/photos/box3/19-t.webp"
+    },
+    {
+     "id": "20",
+     "title": "Meme Queen #20",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/20.webp",
+     "thumb": "/photos/box3/20-t.webp"
+    },
+    {
+     "id": "21",
+     "title": "Meme Queen #21",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/21.webp",
+     "thumb": "/photos/box3/21-t.webp"
+    },
+    {
+     "id": "22",
+     "title": "Cheeky Sidelong Glance",
+     "category": "candid lucu",
+     "note": "Lirikan mata usil yang memicu gelak tawa teman-teman member.",
+     "full": "/photos/box3/22.webp",
+     "thumb": "/photos/box3/22-t.webp"
+    },
+    {
+     "id": "23",
+     "title": "Meme Queen #23",
+     "category": "Meme Queen",
+     "note": "",
+     "full": "/photos/box3/23.webp",
+     "thumb": "/photos/box3/23-t.webp"
+    },
+    {
+     "id": "24",
+     "title": "Meme Queen Ultimate Climax",
+     "category": "pose ikonik",
+     "note": "Mahkota Ratu Meme tak terbantahkan, keceriaan abadi yang menghibur jutaan jiwa.",
+     "full": "/photos/box3/24.webp",
+     "thumb": "/photos/box3/24-t.webp"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "slug": "Box_Senbatsu",
+   "label": "Kotak 4: Senbatsu",
+   "name": "Senbatsu",
+   "color": "#b69cff",
+   "photos": [
+    {
+     "id": "01",
+     "title": "Majestic Single Center Point",
+     "category": "kostum single utama",
+     "note": "Kostum megah bergaris hitam-putih, pose menunjuk ke depan dengan tatapan tajam dan aura bintang panggung.",
+     "full": "/photos/box4/01.webp",
+     "thumb": "/photos/box4/01-t.webp"
+    },
+    {
+     "id": "02",
+     "title": "Senbatsu #02",
+     "category": "Senbatsu",
+     "note": "",
+     "full": "/photos/box4/02.webp",
+     "thumb": "/photos/box4/02-t.webp"
+    },
+    {
+     "id": "03",
+     "title": "Triumphant Festival Chorus",
+     "category": "panggung megah",
+     "note": "Pose kedua tangan terangkat ke atas di puncak lagu di hadapan ribuan penonton festival megah.",
+     "full": "/photos/box4/03.webp",
+     "thumb": "/photos/box4/03-t.webp"
+    },
+    {
+     "id": "04",
+     "title": "Sayonara Crawl Fairytale Princess",
+     "category": "kostum single utama",
+     "note": "Kostum ruffles merah muda-putih lagu Sayonara Crawl (4379x6568), berdiri anggun bak putri dongeng.",
+     "full": "/photos/box4/04.webp",
+     "thumb": "/photos/box4/04-t.webp"
+    },
+    {
+     "id": "05",
+     "title": "Winter Fur Coat & Beret",
+     "category": "panggung megah",
+     "note": "Mantel bulu putih mewah dan baret untuk coupling winter single, mencerminkan pesona visual senbatsu papan atas.",
+     "full": "/photos/box4/05.webp",
+     "thumb": "/photos/box4/05-t.webp"
+    },
+    {
+     "id": "06",
+     "title": "Senbatsu #06",
+     "category": "Senbatsu",
+     "note": "",
+     "full": "/photos/box4/06.webp",
+     "thumb": "/photos/box4/06-t.webp"
+    },
+    {
+     "id": "07",
+     "title": "Golden Hour Salute Pose",
+     "category": "panggung megah",
+     "note": "Pose hormat ceria dengan senyum lebar di bawah pencahayaan keemasan panggung festival.",
+     "full": "/photos/box4/07.webp",
+     "thumb": "/photos/box4/07-t.webp"
+    },
+    {
+     "id": "08",
+     "title": "Sapphire Stage Center Glow",
+     "category": "aura bintang bersinar",
+     "note": "Senyum memesona berlatar tata lampu biru safir sebagai member barisan depan senbatsu.",
+     "full": "/photos/box4/08.webp",
+     "thumb": "/photos/box4/08-t.webp"
+    },
+    {
+     "id": "09",
+     "title": "Senbatsu #09",
+     "category": "Senbatsu",
+     "note": "",
+     "full": "/photos/box4/09.webp",
+     "thumb": "/photos/box4/09-t.webp"
+    },
+    {
+     "id": "10",
+     "title": "Magical Gryffindor Robe Pose",
+     "category": "panggung megah",
+     "note": "Penampilan spesial mengenakan jubah penyihir dengan pose tangan teatrikal yang memikat.",
+     "full": "/photos/box4/10.webp",
+     "thumb": "/photos/box4/10-t.webp"
+    },
+    {
+     "id": "11",
+     "title": "Dramatic Backlight Chorus",
+     "category": "panggung megah",
+     "note": "Bernyanyi di bawah sorot lampu backlight panggung megah yang membingkai siluet anggun.",
+     "full": "/photos/box4/11.webp",
+     "thumb": "/photos/box4/11-t.webp"
+    },
+    {
+     "id": "12",
+     "title": "Warm Senbatsu Stage Greeting",
+     "category": "aura bintang bersinar",
+     "note": "Melambaikan tangan dengan senyum tulus menyapa penggemar dari panggung utama.",
+     "full": "/photos/box4/12.webp",
+     "thumb": "/photos/box4/12-t.webp"
+    },
+    {
+     "id": "13",
+     "title": "Glittering Senbatsu Core",
+     "category": "kostum single utama",
+     "note": "Tatapan memikat dari jajaran inti senbatsu dalam balutan gaun ruffles bergemerlap.",
+     "full": "/photos/box4/13.webp",
+     "thumb": "/photos/box4/13-t.webp"
+    },
+    {
+     "id": "14",
+     "title": "Royal Stage Presence",
+     "category": "panggung megah",
+     "note": "Gestur tangan dramatis di puncak aransemen konser megah senbatsu.",
+     "full": "/photos/box4/14.webp",
+     "thumb": "/photos/box4/14-t.webp"
+    },
+    {
+     "id": "15",
+     "title": "Single Center Harmony",
+     "category": "aura bintang bersinar",
+     "note": "Senyum kemenangan yang membuktikan kedewasaan dan keanggunan seorang member senbatsu.",
+     "full": "/photos/box4/15.webp",
+     "thumb": "/photos/box4/15-t.webp"
+    },
+    {
+     "id": "16",
+     "title": "Sayonara Crawl Elegance",
+     "category": "kostum single utama",
+     "note": "Gaun pastel ruffles berpadu gerak anggun di video klip single utama.",
+     "full": "/photos/box4/16.webp",
+     "thumb": "/photos/box4/16-t.webp"
+    },
+    {
+     "id": "17",
+     "title": "Senbatsu #17",
+     "category": "Senbatsu",
+     "note": "",
+     "full": "/photos/box4/17.webp",
+     "thumb": "/photos/box4/17-t.webp"
+    },
+    {
+     "id": "18",
+     "title": "Senbatsu #18",
+     "category": "Senbatsu",
+     "note": "",
+     "full": "/photos/box4/18.webp",
+     "thumb": "/photos/box4/18-t.webp"
+    },
+    {
+     "id": "19",
+     "title": "Royal Stage Choreography",
+     "category": "panggung megah",
+     "note": "Koreografi simetris agung berbalut busana mewah konser musim panas.",
+     "full": "/photos/box4/19.webp",
+     "thumb": "/photos/box4/19-t.webp"
+    },
+    {
+     "id": "20",
+     "title": "Grand Senbatsu Radiance",
+     "category": "aura bintang bersinar",
+     "note": "Senyum kejayaan di puncak panggung mengukuhkan pencapaian jajaran senbatsu.",
+     "full": "/photos/box4/20.webp",
+     "thumb": "/photos/box4/20-t.webp"
+    },
+    {
+     "id": "21",
+     "title": "Sayonara Crawl Center Formation",
+     "category": "kostum single utama",
+     "note": "Formasi tengah Sayonara Crawl dengan gaun biru laut berenda mewah.",
+     "full": "/photos/box4/21.webp",
+     "thumb": "/photos/box4/21-t.webp"
+    },
+    {
+     "id": "22",
+     "title": "Festival Spotlight Gaze",
+     "category": "panggung megah",
+     "note": "Tatapan tajam karismatik di bawah ribuan cahaya konser akbar.",
+     "full": "/photos/box4/22.webp",
+     "thumb": "/photos/box4/22-t.webp"
+    },
+    {
+     "id": "23",
+     "title": "Senbatsu #23",
+     "category": "Senbatsu",
+     "note": "",
+     "full": "/photos/box4/23.webp",
+     "thumb": "/photos/box4/23-t.webp"
+    },
+    {
+     "id": "24",
+     "title": "Grand Senbatsu Coronation",
+     "category": "aura bintang bersinar",
+     "note": "Puncak kejayaan di barisan senbatsu, mengukir sejarah prestasi emas.",
+     "full": "/photos/box4/24.webp",
+     "thumb": "/photos/box4/24-t.webp"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "slug": "Box_MovieStar",
+   "label": "Kotak 5: Movie Star",
+   "name": "Movie Star",
+   "color": "#ffc29a",
+   "photos": [
+    {
+     "id": "01",
+     "title": "Movie Star #01",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/01.webp",
+     "thumb": "/photos/box5/01-t.webp"
+    },
+    {
+     "id": "02",
+     "title": "Movie Star #02",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/02.webp",
+     "thumb": "/photos/box5/02-t.webp"
+    },
+    {
+     "id": "03",
+     "title": "Script Reading & Film Debut",
+     "category": "cuplikan akting layar lebar",
+     "note": "Memegang buku naskah film di depan dada sambil tersenyum hangat, tonggak sejarah debut layar lebar film horor Kuasa Gelap.",
+     "full": "/photos/box5/03.webp",
+     "thumb": "/photos/box5/03-t.webp"
+    },
+    {
+     "id": "04",
+     "title": "Flashbulb Star Smile",
+     "category": "gala premiere",
+     "note": "Close-up wajah berbinar di bawah kilatan lampu blitz wartawan (3165x4747) dengan senyuman lebar mempesona.",
+     "full": "/photos/box5/04.webp",
+     "thumb": "/photos/box5/04-t.webp"
+    },
+    {
+     "id": "05",
+     "title": "Movie Star #05",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/05.webp",
+     "thumb": "/photos/box5/05-t.webp"
+    },
+    {
+     "id": "06",
+     "title": "Trophy & Sash Achievement",
+     "category": "look aktris sinematik",
+     "note": "Memegang piala penghargaan dengan senyum bangga di hadapan mikrofon.",
+     "full": "/photos/box5/06.webp",
+     "thumb": "/photos/box5/06-t.webp"
+    },
+    {
+     "id": "07",
+     "title": "Movie Star #07",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/07.webp",
+     "thumb": "/photos/box5/07-t.webp"
+    },
+    {
+     "id": "08",
+     "title": "Radiant Cinema Laughter",
+     "category": "gala premiere",
+     "note": "Tawa lepas penuh kebahagiaan di acara pemutaran perdana film layar lebar.",
+     "full": "/photos/box5/08.webp",
+     "thumb": "/photos/box5/08-t.webp"
+    },
+    {
+     "id": "09",
+     "title": "Movie Star #09",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/09.webp",
+     "thumb": "/photos/box5/09-t.webp"
+    },
+    {
+     "id": "10",
+     "title": "Movie Star #10",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/10.webp",
+     "thumb": "/photos/box5/10-t.webp"
+    },
+    {
+     "id": "11",
+     "title": "Movie Star #11",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/11.webp",
+     "thumb": "/photos/box5/11-t.webp"
+    },
+    {
+     "id": "12",
+     "title": "Dynamic Multitalent Encore",
+     "category": "gala premiere",
+     "note": "Aksi panggung enerjik berbalut kostum ruffles pink yang memancarkan karisma bintang.",
+     "full": "/photos/box5/12.webp",
+     "thumb": "/photos/box5/12-t.webp"
+    },
+    {
+     "id": "13",
+     "title": "Cinema Red Carpet Elegance",
+     "category": "gala premiere",
+     "note": "Pesona glamor karpet merah dengan tatapan mata memikat lensa fotografer.",
+     "full": "/photos/box5/13.webp",
+     "thumb": "/photos/box5/13-t.webp"
+    },
+    {
+     "id": "14",
+     "title": "Movie Star #14",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/14.webp",
+     "thumb": "/photos/box5/14-t.webp"
+    },
+    {
+     "id": "15",
+     "title": "Movie Star #15",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/15.webp",
+     "thumb": "/photos/box5/15-t.webp"
+    },
+    {
+     "id": "16",
+     "title": "Movie Star #16",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/16.webp",
+     "thumb": "/photos/box5/16-t.webp"
+    },
+    {
+     "id": "17",
+     "title": "Movie Star #17",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/17.webp",
+     "thumb": "/photos/box5/17-t.webp"
+    },
+    {
+     "id": "18",
+     "title": "Premiere Press Laughter",
+     "category": "gala premiere",
+     "note": "Tawa riang saat berbagi cerita seru di balik layar produksi film.",
+     "full": "/photos/box5/18.webp",
+     "thumb": "/photos/box5/18-t.webp"
+    },
+    {
+     "id": "19",
+     "title": "Gala Evening Glamour",
+     "category": "look aktris sinematik",
+     "note": "Gaun malam sutra hitam berkilau menegaskan kelas aktris sinema.",
+     "full": "/photos/box5/19.webp",
+     "thumb": "/photos/box5/19-t.webp"
+    },
+    {
+     "id": "20",
+     "title": "Movie Star Poise",
+     "category": "look aktris sinematik",
+     "note": "Keanggunan seorang aktris film layar lebar di hadapan media.",
+     "full": "/photos/box5/20.webp",
+     "thumb": "/photos/box5/20-t.webp"
+    },
+    {
+     "id": "21",
+     "title": "Movie Star #21",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/21.webp",
+     "thumb": "/photos/box5/21-t.webp"
+    },
+    {
+     "id": "22",
+     "title": "Cinematic Dramatic Gaze",
+     "category": "cuplikan akting layar lebar",
+     "note": "Ekspresi penuh penjiwaan karakter film layar lebar bioskop.",
+     "full": "/photos/box5/22.webp",
+     "thumb": "/photos/box5/22-t.webp"
+    },
+    {
+     "id": "23",
+     "title": "Movie Star #23",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/23.webp",
+     "thumb": "/photos/box5/23-t.webp"
+    },
+    {
+     "id": "24",
+     "title": "Movie Star #24",
+     "category": "Movie Star",
+     "note": "",
+     "full": "/photos/box5/24.webp",
+     "thumb": "/photos/box5/24-t.webp"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "slug": "Box_TheCaptain",
+   "label": "Kotak 6: The Captain",
+   "name": "The Captain",
+   "color": "#ff9aa8",
+   "photos": [
+    {
+     "id": "01",
+     "title": "The Captain #01",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/01.webp",
+     "thumb": "/photos/box6/01-t.webp"
+    },
+    {
+     "id": "02",
+     "title": "Radiant Gingham Stage Close-Up",
+     "category": "pesona panggung kapten (baru)",
+     "note": "Close-up senyum manis menyanyi dalam balutan gaun kotak-kotak biru-putih dengan latar kuning cerah.",
+     "full": "/photos/box6/02.webp",
+     "thumb": "/photos/box6/02-t.webp"
+    },
+    {
+     "id": "03",
+     "title": "The Captain #03",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/03.webp",
+     "thumb": "/photos/box6/03-t.webp"
+    },
+    {
+     "id": "04",
+     "title": "The Captain #04",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/04.webp",
+     "thumb": "/photos/box6/04-t.webp"
+    },
+    {
+     "id": "05",
+     "title": "The Captain Clipboard & Briefing",
+     "category": "pidato & pengarahan",
+     "note": "Memegang map catatan kapten dan mikrofon di hadapan audiens dengan senyuman ramah.",
+     "full": "/photos/box6/05.webp",
+     "thumb": "/photos/box6/05-t.webp"
+    },
+    {
+     "id": "06",
+     "title": "Sweet Double Heart Gesture",
+     "category": "interaksi hangat penggemar (baru)",
+     "note": "Pose kedua tangan membentuk hati manis di depan dada dengan ekspresi wajah berbinar.",
+     "full": "/photos/box6/06.webp",
+     "thumb": "/photos/box6/06-t.webp"
+    },
+    {
+     "id": "07",
+     "title": "The Captain #07",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/07.webp",
+     "thumb": "/photos/box6/07-t.webp"
+    },
+    {
+     "id": "08",
+     "title": "Number One Overhead Point",
+     "category": "semangat kepemimpinan (baru)",
+     "note": "Mengangkat telunjuk nomor satu di atas kepala dengan tatapan mata mantap penuh optimisme.",
+     "full": "/photos/box6/08.webp",
+     "thumb": "/photos/box6/08-t.webp"
+    },
+    {
+     "id": "09",
+     "title": "Bright Tartan Captain Smile",
+     "category": "momen emosional memimpin member",
+     "note": "Close-up pose jari nomor satu dengan senyum cerah dalam seragam tartan merah-emas.",
+     "full": "/photos/box6/09.webp",
+     "thumb": "/photos/box6/09-t.webp"
+    },
+    {
+     "id": "10",
+     "title": "Crimson Stage Victory Hand",
+     "category": "panggung megah kapten (baru)",
+     "note": "Mengangkat tangan tinggi dengan senyum bahagia di depan tata lampu panggung merah menyala.",
+     "full": "/photos/box6/10.webp",
+     "thumb": "/photos/box6/10-t.webp"
+    },
+    {
+     "id": "11",
+     "title": "Heartfelt Two-Handed Mic Smile",
+     "category": "pesona panggung kapten (baru)",
+     "note": "Memegang mikrofon dengan dua tangan sambil tersenyum tulus dan hangat ke arah penonton.",
+     "full": "/photos/box6/11.webp",
+     "thumb": "/photos/box6/11-t.webp"
+    },
+    {
+     "id": "12",
+     "title": "Soft Head-Tilt Spotlight Portrait",
+     "category": "pesona panggung kapten (baru)",
+     "note": "Potret memiringkan kepala dengan senyum lembut di bawah pendaran lampu panggung.",
+     "full": "/photos/box6/12.webp",
+     "thumb": "/photos/box6/12-t.webp"
+    },
+    {
+     "id": "13",
+     "title": "The Captain #13",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/13.webp",
+     "thumb": "/photos/box6/13-t.webp"
+    },
+    {
+     "id": "14",
+     "title": "The Captain #14",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/14.webp",
+     "thumb": "/photos/box6/14-t.webp"
+    },
+    {
+     "id": "15",
+     "title": "The Captain #15",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/15.webp",
+     "thumb": "/photos/box6/15-t.webp"
+    },
+    {
+     "id": "16",
+     "title": "Inspiring Captain Address",
+     "category": "pidato & pengarahan",
+     "note": "Menyampaikan pesan mendalam dengan wibawa dan kehangatan seorang pemimpin sejati.",
+     "full": "/photos/box6/16.webp",
+     "thumb": "/photos/box6/16-t.webp"
+    },
+    {
+     "id": "17",
+     "title": "Stage Regalia Dignity",
+     "category": "dedikasi kepemimpinan",
+     "note": "Keagungan seragam kapten berpadu dengan tatapan penuh tanggung jawab.",
+     "full": "/photos/box6/17.webp",
+     "thumb": "/photos/box6/17-t.webp"
+    },
+    {
+     "id": "18",
+     "title": "Proud Leadership Smile",
+     "category": "momen emosional memimpin member",
+     "note": "Senyum bangga menatap langkah generasi penerus yang dibimbingnya.",
+     "full": "/photos/box6/18.webp",
+     "thumb": "/photos/box6/18-t.webp"
+    },
+    {
+     "id": "19",
+     "title": "The Captain #19",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/19.webp",
+     "thumb": "/photos/box6/19-t.webp"
+    },
+    {
+     "id": "20",
+     "title": "The Captain #20",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/20.webp",
+     "thumb": "/photos/box6/20-t.webp"
+    },
+    {
+     "id": "21",
+     "title": "Captain Red Tartan Pride",
+     "category": "dedikasi kepemimpinan",
+     "note": "Seragam tartan merah megah mencerminkan semangat juang tak kenal lelah sang Kapten.",
+     "full": "/photos/box6/21.webp",
+     "thumb": "/photos/box6/21-t.webp"
+    },
+    {
+     "id": "22",
+     "title": "The Captain #22",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/22.webp",
+     "thumb": "/photos/box6/22-t.webp"
+    },
+    {
+     "id": "23",
+     "title": "The Captain #23",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/23.webp",
+     "thumb": "/photos/box6/23-t.webp"
+    },
+    {
+     "id": "24",
+     "title": "The Captain #24",
+     "category": "The Captain",
+     "note": "",
+     "full": "/photos/box6/24.webp",
+     "thumb": "/photos/box6/24-t.webp"
+    }
+   ]
+  }
+ ],
+ "board": {
+  "Cardboard_Photo_01": "/photos/board/01.webp",
+  "Cardboard_Photo_02": "/photos/board/02.webp",
+  "Cardboard_Photo_03": "/photos/board/03.webp",
+  "Cardboard_Photo_04": "/photos/board/04.webp",
+  "Cardboard_Photo_05": "/photos/board/05.webp",
+  "Cardboard_Photo_06": "/photos/board/06.webp",
+  "Cardboard_Photo_07": "/photos/board/07.webp",
+  "Cardboard_Photo_08": "/photos/board/08.webp",
+  "Cardboard_Photo_09": "/photos/board/09.webp",
+  "Cardboard_Photo_10": "/photos/board/10.webp",
+  "Cardboard_Photo_11": "/photos/board/11.webp",
+  "Cardboard_Photo_12": "/photos/board/12.webp",
+  "Cardboard_Photo_13": "/photos/board/13.webp",
+  "Cardboard_Photo_14": "/photos/board/14.webp",
+  "Cardboard_Photo_15": "/photos/board/15.webp",
+  "Cardboard_Photo_16": "/photos/board/16.webp",
+  "Cardboard_Photo_17": "/photos/board/17.webp",
+  "Cardboard_Photo_18": "/photos/board/18.webp",
+  "Cardboard_Photo_19": "/photos/board/19.webp",
+  "Cardboard_Photo_20": "/photos/board/20.webp",
+  "Cardboard_Photo_21": "/photos/board/21.webp",
+  "Cardboard_Photo_22": "/photos/board/22.webp",
+  "Cardboard_Photo_23": "/photos/board/23.webp",
+  "Cardboard_Photo_24": "/photos/board/24.webp",
+  "Cardboard_Photo_25": "/photos/board/25.webp",
+  "Cardboard_Photo_26": "/photos/board/26.webp",
+  "Cardboard_Photo_27": "/photos/board/27.webp",
+  "Cardboard_Photo_28": "/photos/board/28.webp",
+  "Cardboard_Photo_29": "/photos/board/29.webp",
+  "Cardboard_Photo_30": "/photos/board/30.webp",
+  "Cardboard_Photo_31": "/photos/board/31.webp",
+  "Cardboard_Photo_32": "/photos/board/32.webp",
+  "Cardboard_Photo_33": "/photos/board/33.webp",
+  "Cardboard_Photo_34": "/photos/board/34.webp",
+  "Cardboard_Photo_35": "/photos/board/35.webp",
+  "Cardboard_Photo_36": "/photos/board/36.webp",
+  "Cardboard_Photo_37": "/photos/board/37.webp",
+  "Cardboard_Photo_38": "/photos/board/38.webp",
+  "Cardboard_Photo_39": "/photos/board/39.webp",
+  "Cardboard_Photo_40": "/photos/board/40.webp",
+  "Cardboard_Photo_41": "/photos/board/41.webp",
+  "Cardboard_Photo_42": "/photos/board/42.webp",
+  "Cardboard_Photo_43": "/photos/board/43.webp",
+  "Cardboard_Photo_44": "/photos/board/44.webp",
+  "Cardboard_Photo_45": "/photos/board/45.webp",
+  "Cardboard_Photo_46": "/photos/board/46.webp",
+  "Cardboard_Photo_47": "/photos/board/47.webp",
+  "Cardboard_Photo_48": "/photos/board/48.webp",
+  "Cardboard_Photo_49": "/photos/board/49.webp",
+  "Cardboard_Photo_50": "/photos/board/50.webp",
+  "Cardboard_Photo_51": "/photos/board/51.webp",
+  "Cardboard_Photo_52": "/photos/board/52.webp",
+  "Cardboard_Photo_53": "/photos/board/53.webp",
+  "Cardboard_Photo_54": "/photos/board/54.webp",
+  "Cardboard_Photo_55": "/photos/board/55.webp",
+  "Cardboard_Photo_56": "/photos/board/56.webp",
+  "Cardboard_Photo_57": "/photos/board/57.webp",
+  "Cardboard_Photo_58": "/photos/board/58.webp",
+  "Cardboard_Photo_59": "/photos/board/59.webp",
+  "Cardboard_Photo_60": "/photos/board/60.webp"
+ }
+}

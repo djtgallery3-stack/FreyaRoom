@@ -1,0 +1,46 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Georgia', 'Times New Roman', serif;
+}
+
+@layer components {
+  .kbd {
+    @apply mx-0.5 inline-block rounded border border-white/25 bg-white/10 px-1.5 py-px font-mono text-[0.7rem] leading-snug text-white;
+  }
+
+  .btn-icon {
+    @apply inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-300;
+  }
+
+  .modal {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-3 backdrop-blur-sm sm:p-6;
+  }
+  .modal[hidden] {
+    display: none;
+  }
+  .modal-panel {
+    @apply flex max-h-full w-full flex-col overflow-hidden rounded-3xl bg-[#2a1b3a]/95 shadow-2xl ring-1 ring-white/10;
+    height: min(46rem, 100%);
+  }
+}
+
+#gallery-grid button {
+  @apply block w-full cursor-pointer overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-300;
+}
+#gallery-grid button:hover img {
+  transform: scale(1.06);
+}
+#gallery-grid img {
+  @apply aspect-[2/3] w-full object-cover transition-transform duration-300;
+}
+
+#reticle.is-active {
+  @apply h-4 w-4 bg-pink-300/90 ring-white/70;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
