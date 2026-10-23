@@ -8,8 +8,8 @@
     <title>Freya's Room — Interactive 3D</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%80%3C/text%3E%3C/svg%3E" />
     <link rel="preload" href="/models/room.glb" as="fetch" crossorigin />
-    <script type="module" crossorigin src="/assets/index-BWKNC1XY.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DL4NYble.css">
+    <script type="module" crossorigin src="/assets/index-7T6jxqG4.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Drd-u_EA.css">
   </head>
   <body class="bg-[#1b1226] text-white antialiased overflow-hidden select-none">
     <canvas id="scene" class="fixed inset-0 h-full w-full outline-none" tabindex="-1" aria-label="Kamar Freya 3D"></canvas>
@@ -23,12 +23,13 @@
         id="prompt"
         role="status"
         aria-live="polite"
-        class="absolute left-1/2 top-[56%] -translate-x-1/2 rounded-full bg-black/55 px-4 py-2 text-sm font-medium opacity-0 backdrop-blur transition-opacity duration-150"
+        class="pointer-events-none absolute left-1/2 top-[53%] -translate-x-1/2 rounded-full bg-black/80 px-4 py-1.5 text-xs sm:text-sm font-semibold text-pink-200 ring-1 ring-white/20 shadow-lg backdrop-blur-md opacity-0 transition-all duration-150 tracking-wide select-none whitespace-nowrap"
       ></p>
       <p class="absolute bottom-4 left-4 hidden rounded-lg bg-black/40 px-3 py-2 text-xs leading-relaxed text-white/80 backdrop-blur sm:block">
         <kbd class="kbd">W</kbd><kbd class="kbd">A</kbd><kbd class="kbd">S</kbd><kbd class="kbd">D</kbd> jalan ·
         <kbd class="kbd">Shift</kbd> lari · <kbd class="kbd">E</kbd>/klik interaksi ·
-        <kbd class="kbd">L</kbd> saklar lampu · <kbd class="kbd">P</kbd> musik · <kbd class="kbd">M</kbd> bisukan · <kbd class="kbd">Esc</kbd> lepas kursor
+        <kbd class="kbd">L</kbd> saklar lampu · <kbd class="kbd">P</kbd> musik · <kbd class="kbd">M</kbd> bisukan ·
+        <kbd class="kbd">,</kbd>/<kbd class="kbd">.</kbd> volume · <kbd class="kbd">Esc</kbd> lepas kursor
       </p>
     </div>
 
@@ -114,6 +115,7 @@
           <dt><kbd class="kbd">E</kbd> / klik</dt><dd>Buka kotak, foto, boneka, atau saklar</dd>
           <dt><kbd class="kbd">L</kbd></dt><dd>Ganti mode suasana lampu (Terang / Malam)</dd>
           <dt><kbd class="kbd">P</kbd> / <kbd class="kbd">M</kbd></dt><dd>Putar/jeda / bisukan musik</dd>
+          <dt><kbd class="kbd">,</kbd> / <kbd class="kbd">.</kbd></dt><dd>Kecilkan / besarkan volume musik</dd>
           <dt><kbd class="kbd">Esc</kbd></dt><dd>Lepas kursor / tutup jendela</dd>
         </dl>
         <p id="start-note" class="mt-5 hidden text-xs text-amber-200/80">

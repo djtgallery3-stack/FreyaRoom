@@ -42,9 +42,26 @@ export class Interaction {
     this.#animateLids(dt);
   }
 
+  /** Clear hover highlight on any currently hovered object. */
+  clearHover() {
+    if (this.hovered) {
+      this.#tint(this.hovered, false);
+      this.hovered = null;
+      if (this.promptEl) {
+        this.promptEl.textContent = '';
+        this.promptEl.style.opacity = '0';
+      }
+      if (this.reticleEl) {
+        this.reticleEl.classList.remove('is-active');
+      }
+    }
+  }
+
   /** Activate whatever is under the reticle. Returns the interactable or null. */
   activate() {
-    return this.hovered;
+    const target = this.hovered;
+    this.clearHover();
+    return target;
   }
 
   openBox(entry) {

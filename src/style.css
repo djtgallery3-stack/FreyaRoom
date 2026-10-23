@@ -35,8 +35,11 @@
   @apply aspect-[2/3] w-full object-cover transition-transform duration-300;
 }
 
+#reticle {
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
 #reticle.is-active {
-  @apply h-4 w-4 bg-pink-300/90 ring-white/70;
+  @apply h-5 w-5 bg-pink-300/90 ring-4 ring-pink-400/40 shadow-[0_0_16px_rgba(244,114,182,0.85)] scale-125;
 }
 
 @media (prefers-reduced-motion: reduce) {

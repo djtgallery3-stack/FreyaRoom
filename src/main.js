@@ -15,13 +15,14 @@ const isDebug = new URLSearchParams(location.search).has('debug');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
 renderer.setSize(innerWidth, innerHeight, false);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.15;
+renderer.toneMappingExposure = 0.88;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFShadowMap;
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.05, 40);
+const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.05, 40);
 camera.rotation.order = 'YXZ';
 
 addEventListener('resize', () => {
@@ -160,12 +161,19 @@ function activate() {
   }
 }
 
+function adjustVolume(delta) {
+  audio.setVolume(audio.volume + delta);
+  syncAudioUi();
+}
+
 addEventListener('keydown', (e) => {
   if (e.repeat) return;
   if (e.code === 'KeyE') activate();
   else if (e.code === 'KeyL') toggleLighting();
   else if (e.code === 'KeyP') togglePlayPause();
   else if (e.code === 'KeyM') toggleMute();
+  else if (e.code === 'Comma') adjustVolume(-0.05);
+  else if (e.code === 'Period') adjustVolume(0.05);
 });
 canvas.addEventListener('mousedown', (e) => {
   if (e.button === 0) activate();

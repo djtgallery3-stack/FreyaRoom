@@ -43,6 +43,7 @@ export async function loadWorld(scene, renderer, onProgress) {
   scene.add(root);
   root.updateMatrixWorld(true);
 
+  const maxAnisotropy = renderer.capabilities.getMaxAnisotropy();
   const byName = new Map();
   root.traverse((o) => {
     byName.set(o.name, o);
@@ -51,35 +52,80 @@ export async function loadWorld(scene, renderer, onProgress) {
       const size = new THREE.Box3().setFromObject(o).getSize(new THREE.Vector3());
       o.castShadow = Math.max(size.x, size.y, size.z) > 0.45;
       o.receiveShadow = true;
-      const m = o.material;
-      if (m?.map) m.map.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
-      // glTF export drops the alpha of the sticker PNGs: restore it.
-      if (/^Mat_Sticker/.test(m?.name ?? '')) {
-        m.transparent = true;
-        m.depthWrite = false;
-        m.polygonOffset = true;
-        m.polygonOffsetFactor = -2;
+
+      // Anisotropic filtering on all textures to prevent moiré / texture shimmering
+      const mats = Array.isArray(o.material) ? o.material : [o.material];
+      for (const m of mats) {
+        if (!m) continue;
+        for (const key of ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'aoMap', 'emissiveMap']) {
+          if (m[key]) {
+            m[key].anisotropy = maxAnisotropy;
+          }
+        }
+
+        // glTF export drops the alpha of the sticker PNGs: restore it.
+        if (/^Mat_Sticker/.test(m.name ?? '')) {
+          m.transparent = true;
+          m.depthWrite = false;
+          m.polygonOffset = true;
+          m.polygonOffsetFactor = -2;
+        }
+
+        // Tune room ceiling and walls to match moody movie reels
+        if (m.name === 'Mat_RoomCeiling') {
+          m.color = new THREE.Color(0x524c4e);
+          m.roughness = 0.95;
+        }
+        if (m.name === 'Mat_FloralWallpaper') {
+          m.color = new THREE.Color(0xb0a094);
+          m.roughness = 0.85;
+        }
       }
-      // Give the desk lamp shade a warm ambient glow
+
+      // Kap lampu meja (Top_S) - translucent warm glowing shade like Blender render
+      if (o.name === 'Top_S') {
+        for (const m of mats) {
+          m.color = new THREE.Color(0xffc58a);
+          m.emissive = new THREE.Color(0xff9438);
+          m.emissiveIntensity = 1.6;
+          m.roughness = 0.55;
+          m.metalness = 0.0;
+          m.transparent = true;
+          m.opacity = 0.90;
+          m.depthWrite = true;
+          m.needsUpdate = true;
+        }
+      }
       if (o.name === 'Lamp_S') {
-        m.emissive = new THREE.Color(0xffaa44);
-        m.emissiveIntensity = 2.5;
+        for (const m of mats) {
+          m.emissive = new THREE.Color(0xffb84d);
+          m.emissiveIntensity = 2.8;
+          m.needsUpdate = true;
+        }
       }
-      // Tune room ceiling and walls to match moody movie reels
-      if (m?.name === 'Mat_RoomCeiling') {
-        m.color = new THREE.Color(0x524c4e);
-        m.roughness = 0.95;
-      }
-      if (m?.name === 'Mat_FloralWallpaper') {
-        m.color = new THREE.Color(0xb0a094);
-        m.roughness = 0.85;
+
+      // Perhalus material kasur, selimut, bantal & tirai agar lembut seperti kain
+      const matNames = mats.map((m) => m?.name ?? '').join(' ');
+      if (
+        /^(Bed|blanket|Pillow|Curtain)/i.test(o.name) ||
+        /Mat_(MattressCotton|DuvetPink|SheerCurtain|BedFrameWhite)/.test(matNames)
+      ) {
+        if (o.geometry) {
+          o.geometry.computeVertexNormals();
+        }
+        for (const m of mats) {
+          m.roughness = 0.85;
+          m.metalness = 0.0;
+          m.flatShading = false;
+          m.needsUpdate = true;
+        }
       }
     }
   });
   const find = (n) => byName.get(sanitize(n));
 
   const lighting = new LightingController(scene, renderer);
-  const interactablesData = buildInteractables(root, find, scene);
+  const interactablesData = buildInteractables(root, find, scene, renderer);
 
   return {
     root,
@@ -107,10 +153,11 @@ function buildColliders(find) {
 
 const BOX_DEFS = memories.boxes; // { n, slug, label, name, color, photos }
 
-function buildInteractables(root, find, scene) {
+function buildInteractables(root, find, scene, renderer) {
   /** @type {{ kind: 'box'|'photo'|'doll'|'switch', proxy: THREE.Mesh, prompt: string, [k: string]: any }[]} */
   const interactables = [];
   const proxyMat = new THREE.MeshBasicMaterial({ visible: false });
+  const maxAnisotropy = renderer ? renderer.capabilities.getMaxAnisotropy() : 8;
 
   const addProxy = (bounds, data, pad = 0.03) => {
     const size = bounds.getSize(new THREE.Vector3()).addScalar(pad * 2);
@@ -144,7 +191,7 @@ function buildInteractables(root, find, scene) {
       closedQuat,
       openAmount: 0, // 0 = closed .. 1 = open
       target: 0,
-      prompt: `Tekan E atau klik untuk membuka — ${def.name}`,
+      prompt: `[E / Klik] Buka Kotak Era — ${def.name}`,
       mesh: base,
     });
   }
@@ -166,7 +213,7 @@ function buildInteractables(root, find, scene) {
     b.mesh.material = b.mesh.material.clone(); // own material so hover can tint just this photo
     const bounds = new THREE.Box3().setFromObject(b.mesh);
     // the photos are thin planes: give the proxy depth so the ray reliably hits
-    addProxy(bounds, { kind: 'photo', index: i, items: lightboxItems, mesh: b.mesh, prompt: 'Tekan E atau klik untuk melihat foto' }, 0.02);
+    addProxy(bounds, { kind: 'photo', index: i, items: lightboxItems, mesh: b.mesh, prompt: '[E / Klik] Lihat Foto Kenangan' }, 0.02);
   });
 
   // --- Freya dolls ------------------------------------------------------------
@@ -178,20 +225,40 @@ function buildInteractables(root, find, scene) {
     }
     mesh.material = mesh.material.clone();
     mesh.material.normalMap = null;
-    mesh.material.roughness = 0.65;
+    mesh.material.roughness = 0.8;
     mesh.material.metalness = 0.0;
     mesh.material.flatShading = false;
+    mesh.material.vertexColors = false;
+    mesh.material.color.setHex(0xffffff);
+    if (mesh.material.map) {
+      mesh.material.map.colorSpace = THREE.SRGBColorSpace;
+      mesh.material.map.anisotropy = maxAnisotropy;
+    }
     mesh.material.needsUpdate = true;
     if (mesh.geometry) {
       mesh.geometry = mesh.geometry.clone();
+      if (mesh.geometry.attributes.color) {
+        mesh.geometry.deleteAttribute('color');
+      }
       mesh.geometry.computeVertexNormals();
     }
     addProxy(new THREE.Box3().setFromObject(mesh), {
       kind: 'doll',
       title,
       mesh,
-      prompt: `Tekan E atau klik untuk memutar — ${title}`,
+      prompt: `[E / Klik] Putar Boneka 3D — ${title}`,
     }, 0.02);
+  }
+
+  // --- Desk lamp clickable proxy ----------------------------------------------
+  const deskLampNode = find('Leg_S') || find('Lamp_S');
+  if (deskLampNode) {
+    const bounds = new THREE.Box3().setFromObject(deskLampNode);
+    addProxy(bounds, {
+      kind: 'switch',
+      prompt: '[E / Klik] Lampu Meja (Ganti Suasana)',
+      mesh: deskLampNode,
+    }, 0.04);
   }
 
   // --- physical light switch near door ----------------------------------------
@@ -241,7 +308,7 @@ function buildInteractables(root, find, scene) {
     switchBounds,
     {
       kind: 'switch',
-      prompt: 'Tekan E atau klik saklar — Matikan lampu (Mode Malam)',
+      prompt: '[E / Klik] Saklar Lampu (Mode Malam)',
       mesh: plate,
       rocker,
       ledMat,
@@ -253,8 +320,8 @@ function buildInteractables(root, find, scene) {
         this.ledMat.emissive.setHex(color);
         this.ledMat.emissiveIntensity = isNight ? 3.0 : 2.0;
         this.prompt = isNight
-          ? 'Tekan E atau klik saklar — Nyalakan lampu (Mode Terang)'
-          : 'Tekan E atau klik saklar — Matikan lampu (Mode Malam)';
+          ? '[E / Klik] Saklar Lampu (Mode Terang)'
+          : '[E / Klik] Saklar Lampu (Mode Malam)';
       },
     },
     0.04,
