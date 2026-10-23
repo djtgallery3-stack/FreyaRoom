@@ -86,14 +86,17 @@ export class UI {
         const li = document.createElement('li');
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.setAttribute('aria-label', `Buka foto: ${p.title}`);
+        btn.setAttribute('aria-label', `${box.label || box.name} - Foto ${i + 1}`);
         const img = new Image();
         img.src = p.thumb;
-        img.alt = p.title;
+        img.alt = `${box.label || box.name} - Foto ${i + 1}`;
         img.loading = 'lazy';
         img.decoding = 'async';
         btn.append(img);
-        btn.addEventListener('click', () => this.openLightbox(box.photos, i));
+        btn.addEventListener('click', () => this.openLightbox(box.photos, i, null, {
+          boxTitle: box.label || `Kotak ${box.n}: ${box.name}`,
+          boxColor: box.color,
+        }));
         li.append(btn);
         return li;
       }),
@@ -102,9 +105,14 @@ export class UI {
     this.#open(this.gallery, { onClose, focus: grid.querySelector('button') });
   }
 
-  /** @param items { full, title, note }[] */
-  openLightbox(items, index = 0, onClose) {
-    this.lb = { items, index };
+  /** @param items { full, title, note, boxTitle?, boxColor? }[] */
+  openLightbox(items, index = 0, onClose, options = {}) {
+    this.lb = {
+      items,
+      index,
+      boxTitle: options.boxTitle || items[index]?.boxTitle || '',
+      boxColor: options.boxColor || items[index]?.boxColor || '',
+    };
     this.#renderLightbox();
     const multi = items.length > 1;
     $('lb-prev').hidden = $('lb-next').hidden = !multi;
@@ -119,14 +127,33 @@ export class UI {
   }
 
   #renderLightbox() {
-    const { items, index } = this.lb;
+    const { items, index, boxTitle, boxColor } = this.lb;
     const p = items[index];
     const img = $('lightbox-img');
     img.src = p.full;
-    img.alt = p.title;
-    $('lightbox-title').textContent = p.title;
-    $('lightbox-note').textContent = p.note ?? '';
-    $('lightbox-pos').textContent = items.length > 1 ? `${index + 1} / ${items.length}` : '';
+
+    const activeBoxTitle = p.boxTitle || boxTitle || 'Foto Kenangan';
+    const activeBoxColor = p.boxColor || boxColor || '';
+
+    img.alt = `${activeBoxTitle} - Foto ${index + 1}`;
+
+    const titleEl = $('lightbox-title');
+    titleEl.textContent = activeBoxTitle;
+    if (activeBoxColor) {
+      titleEl.style.color = activeBoxColor;
+    } else {
+      titleEl.style.color = '';
+    }
+
+    const noteEl = $('lightbox-note');
+    if (noteEl) {
+      noteEl.textContent = '';
+      noteEl.hidden = true;
+    }
+
+    const posEl = $('lightbox-pos');
+    posEl.textContent = items.length > 1 ? `Foto ${index + 1} dari ${items.length}` : `Foto ${index + 1}`;
+
     // warm the neighbours
     for (const n of [items[(index + 1) % items.length], items[(index - 1 + items.length) % items.length]]) {
       if (n && n !== p) new Image().src = n.full;

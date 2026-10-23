@@ -15,6 +15,7 @@ export class AudioManager {
     this.paused = false;
     this.walking = false;
     this.audioCtx = null;
+    this.bgmGain = null;
     this.#apply();
   }
 
@@ -22,13 +23,51 @@ export class AudioManager {
     return this.started && !this.bgm.paused;
   }
 
+  initWebAudio() {
+    if (this.bgmGain) return;
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      if (!this.audioCtx) this.audioCtx = new AudioCtx();
+      if (this.audioCtx.state === 'suspended') {
+        this.audioCtx.resume().catch(() => {});
+      }
+
+      const source = this.audioCtx.createMediaElementSource(this.bgm);
+      this.bgmGain = this.audioCtx.createGain();
+      const effectiveVol = this.muted ? 0 : this.volume;
+      this.bgmGain.gain.setValueAtTime(effectiveVol, this.audioCtx.currentTime);
+      source.connect(this.bgmGain);
+      this.bgmGain.connect(this.audioCtx.destination);
+    } catch (err) {
+      console.warn('Web Audio routing fallback:', err);
+    }
+  }
+
   #apply() {
-    this.bgm.volume = this.muted ? 0 : this.volume;
+    const effectiveVol = this.muted ? 0 : this.volume;
+
+    // 1. Native HTMLMediaElement properties (critical for all desktop & mobile)
+    this.bgm.muted = this.muted;
+    this.bgm.volume = effectiveVol;
     this.steps.muted = this.muted;
+    this.steps.volume = this.muted ? 0 : this.volume * 0.5;
     this.open.muted = this.muted;
+    this.open.volume = this.muted ? 0 : this.volume * 0.6;
+
+    // 2. Web Audio GainNode (crucial for iOS Safari software volume & mute control)
+    if (this.bgmGain && this.audioCtx) {
+      try {
+        this.bgmGain.gain.setValueAtTime(effectiveVol, this.audioCtx.currentTime);
+      } catch {}
+    }
   }
 
   start() {
+    this.initWebAudio();
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume().catch(() => {});
+    }
     if (this.started) {
       if (this.bgm.paused && !this.paused) {
         this.bgm.play().catch(() => {});
@@ -37,10 +76,15 @@ export class AudioManager {
     }
     this.started = true;
     this.paused = false;
+    this.#apply();
     this.bgm.play().catch(() => (this.started = false));
   }
 
   togglePlay() {
+    this.initWebAudio();
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume().catch(() => {});
+    }
     if (!this.started) {
       this.start();
       return true;

@@ -436,18 +436,37 @@ function setupControls() {
   // Lighting toggle
   $('light-toggle').addEventListener('click', toggleLighting);
 
-  // Audio BGM Play/Pause
+  // Audio BGM Play/Pause (HUD & Menu)
   $('play-pause').addEventListener('click', togglePlayPause);
+  $('menu-play-btn')?.addEventListener('click', togglePlayPause);
 
-  // Audio Mute toggle
+  // Audio Mute toggle (HUD & Menu)
   $('mute').addEventListener('click', toggleMute);
+  $('menu-mute-btn')?.addEventListener('click', toggleMute);
 
-  // Volume range slider
+  // Volume range slider (Top HUD)
   const volume = $('volume');
-  volume.addEventListener('input', () => {
+  const onVolChange = () => {
     audio.setVolume(Number(volume.value));
     syncAudioUi();
-  });
+  };
+  volume.addEventListener('input', onVolChange);
+  volume.addEventListener('change', onVolChange);
+
+  // Volume range slider (Menu card)
+  const menuVolume = $('menu-volume');
+  if (menuVolume) {
+    const onMenuVolChange = () => {
+      audio.setVolume(Number(menuVolume.value));
+      syncAudioUi();
+    };
+    menuVolume.addEventListener('input', onMenuVolChange);
+    menuVolume.addEventListener('change', onMenuVolChange);
+  }
+
+  // Menu volume step buttons (- / +)
+  $('menu-vol-down')?.addEventListener('click', () => adjustVolume(-0.1));
+  $('menu-vol-up')?.addEventListener('click', () => adjustVolume(0.1));
 
   syncLightingUi(world.lighting.isNight);
   syncAudioUi();
@@ -488,11 +507,27 @@ function syncAudioUi() {
   $('play-pause').setAttribute('aria-label', isPlaying ? 'Jeda musik' : 'Putar musik');
   $('play-pause').title = isPlaying ? 'Jeda Musik [P]' : 'Putar Musik [P]';
 
+  // Menu play button
+  const menuPlayIcon = $('menu-play-icon');
+  if (menuPlayIcon) menuPlayIcon.textContent = isPlaying ? '⏸️' : '▶️';
+  $('menu-play-btn')?.setAttribute('aria-label', isPlaying ? 'Jeda musik' : 'Putar musik');
+
   $('mute').setAttribute('aria-pressed', String(audio.muted));
   $('mute').setAttribute('aria-label', audio.muted ? 'Hidupkan musik' : 'Bisukan musik');
   $('icon-sound').classList.toggle('hidden', audio.muted);
   $('icon-muted').classList.toggle('hidden', !audio.muted);
-  $('volume').value = audio.muted ? 0 : audio.volume;
+
+  const displayVol = audio.muted ? 0 : audio.volume;
+  $('volume').value = displayVol;
+
+  // Menu volume & mute sync
+  const menuVolume = $('menu-volume');
+  if (menuVolume) menuVolume.value = displayVol;
+  const menuVolumePct = $('menu-volume-pct');
+  if (menuVolumePct) menuVolumePct.textContent = `${Math.round(displayVol * 100)}%`;
+  const menuMuteIcon = $('menu-mute-icon');
+  if (menuMuteIcon) menuMuteIcon.textContent = audio.muted ? '🔇' : '🔊';
+  $('menu-mute-btn')?.setAttribute('aria-label', audio.muted ? 'Hidupkan musik' : 'Bisukan musik');
 }
 
 function updateMobileActionUi(hit) {

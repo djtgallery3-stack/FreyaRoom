@@ -8,8 +8,8 @@
     <title>Freya's Room — Interactive 3D</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%80%3C/text%3E%3C/svg%3E" />
     <link rel="preload" href="/models/room.glb" as="fetch" crossorigin />
-    <script type="module" crossorigin src="/assets/index-jYQPT3ey.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-D84aEptX.css">
+    <script type="module" crossorigin src="/assets/index-DGFFYzOU.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BGRGKxeb.css">
   </head>
   <body class="bg-[#1b1226] text-white antialiased overflow-hidden select-none">
     <canvas id="scene" class="fixed inset-0 h-full w-full outline-none" tabindex="-1" aria-label="Kamar Freya 3D"></canvas>
@@ -187,12 +187,12 @@
 
     <!-- Lightbox -->
     <div id="lightbox" class="modal z-[70]" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
-      <figure class="relative flex h-full max-h-full w-full max-w-5xl flex-col items-center justify-center gap-3 p-4">
+      <figure class="relative flex h-full max-h-full w-full max-w-5xl flex-col items-center justify-center gap-2 p-4">
         <img id="lightbox-img" alt="" class="min-h-0 max-w-full flex-1 rounded-lg object-contain shadow-2xl" decoding="async" />
         <figcaption class="text-center">
-          <p id="lightbox-title" class="font-display text-xl"></p>
-          <p id="lightbox-note" class="mx-auto mt-1 max-w-xl text-sm text-white/70"></p>
-          <p id="lightbox-pos" class="mt-1 text-xs text-white/40"></p>
+          <p id="lightbox-title" class="font-display text-lg sm:text-xl font-medium tracking-wide"></p>
+          <p id="lightbox-pos" class="mt-1 text-xs sm:text-sm text-white/80 font-sans font-medium"></p>
+          <p id="lightbox-note" class="hidden"></p>
         </figcaption>
         <button type="button" class="btn-icon absolute right-4 top-4" data-close aria-label="Tutup foto">
           <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>

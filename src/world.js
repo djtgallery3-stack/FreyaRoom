@@ -152,6 +152,12 @@ function buildColliders(find) {
 }
 
 const BOX_DEFS = memories.boxes; // { n, slug, label, name, color, photos }
+for (const box of BOX_DEFS) {
+  for (const p of box.photos) {
+    p.boxTitle = box.label || `Kotak ${box.n}: ${box.name}`;
+    p.boxColor = box.color;
+  }
+}
 
 function buildInteractables(root, find, scene, renderer) {
   /** @type {{ kind: 'box'|'photo'|'doll'|'switch', proxy: THREE.Mesh, prompt: string, [k: string]: any }[]} */
@@ -207,7 +213,9 @@ function buildInteractables(root, find, scene, renderer) {
   const lightboxItems = boardItems.map((b, i) => ({
     full: b.url,
     title: `Foto papan #${i + 1}`,
-    note: 'Papan foto di dinding kamar Freya',
+    note: '',
+    boxTitle: 'Papan Foto Dinding',
+    boxColor: '#ff8fb8',
   }));
   boardItems.forEach((b, i) => {
     b.mesh.material = b.mesh.material.clone(); // own material so hover can tint just this photo
