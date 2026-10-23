@@ -89,6 +89,9 @@ try {
       showStart,
       hideStart,
       isMobile,
+      get isOpeningBox() {
+        return isOpeningBox;
+      },
     };
   }
 } catch (err) {
@@ -227,18 +230,30 @@ function openModal(open) {
   });
 }
 
+let isOpeningBox = false;
+
 function activate(customEntry = null) {
-  if ((!isMobile && !player.isLocked && !isDebug) || ui.isOpen) return;
+  if ((!isMobile && !player.isLocked && !isDebug) || ui.isOpen || isOpeningBox) return;
   const entry = customEntry || interaction.activate();
   if (!entry) return;
   interaction.clearHover();
 
   switch (entry.kind) {
-    case 'box':
+    case 'box': {
+      isOpeningBox = true;
+      player.setFrozen(true);
       interaction.openBox(entry);
       audio.playOpen();
-      openModal((done) => ui.openGallery(entry.def, done));
+
+      // Allow the player to see the 3D box lid smoothly open (-115°)
+      // along with the creak audio SFX before the photo gallery modal appears
+      setTimeout(() => {
+        isOpeningBox = false;
+        player.setFrozen(false);
+        openModal((done) => ui.openGallery(entry.def, done));
+      }, 700);
       break;
+    }
     case 'photo':
       openModal((done) => ui.openLightbox(entry.items, entry.index, done));
       break;
@@ -578,7 +593,7 @@ renderer.setAnimationLoop(() => {
   prevTime = now;
   const active = (isMobile ? player.isPlaying : player.isLocked || isDebug) && !ui.isOpen;
   player.update(dt);
-  interaction.update(dt, active);
+  interaction.update(dt, active && !isOpeningBox);
   world.lighting.update(dt);
   audio.setWalking(active && player.moving);
   if (isMobile && active) updateMobileActionUi(interaction.hovered);

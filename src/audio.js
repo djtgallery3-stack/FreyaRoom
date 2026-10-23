@@ -8,7 +8,7 @@ export class AudioManager {
   constructor() {
     this.bgm = Object.assign(new Audio(BGM_URL), { loop: true, preload: 'auto' });
     this.steps = Object.assign(new Audio(STEP_URL), { loop: true, preload: 'auto', volume: 0.5 });
-    this.open = Object.assign(new Audio(OPEN_URL), { preload: 'auto', volume: 0.6 });
+    this.open = Object.assign(new Audio(OPEN_URL), { preload: 'auto', volume: 0.9 });
     this.volume = 0.4;
     this.muted = false;
     this.started = false;
@@ -16,7 +16,23 @@ export class AudioManager {
     this.walking = false;
     this.audioCtx = null;
     this.bgmGain = null;
+    this.openBuffer = null;
+    this.openArrayBuffer = null;
+    this.#loadOpenBuffer();
     this.#apply();
+  }
+
+  async #loadOpenBuffer() {
+    try {
+      const res = await fetch(OPEN_URL);
+      if (!res.ok) return;
+      this.openArrayBuffer = await res.arrayBuffer();
+      if (this.audioCtx && !this.openBuffer) {
+        this.openBuffer = await this.audioCtx.decodeAudioData(this.openArrayBuffer.slice(0));
+      }
+    } catch (e) {
+      console.warn('Could not preload box-open audio buffer:', e);
+    }
   }
 
   get isPlaying() {
@@ -31,6 +47,12 @@ export class AudioManager {
       if (!this.audioCtx) this.audioCtx = new AudioCtx();
       if (this.audioCtx.state === 'suspended') {
         this.audioCtx.resume().catch(() => {});
+      }
+
+      if (this.openArrayBuffer && !this.openBuffer) {
+        this.audioCtx.decodeAudioData(this.openArrayBuffer.slice(0)).then((buf) => {
+          this.openBuffer = buf;
+        }).catch(() => {});
       }
 
       const source = this.audioCtx.createMediaElementSource(this.bgm);
@@ -53,7 +75,7 @@ export class AudioManager {
     this.steps.muted = this.muted;
     this.steps.volume = this.muted ? 0 : this.volume * 0.5;
     this.open.muted = this.muted;
-    this.open.volume = this.muted ? 0 : this.volume * 0.6;
+    this.open.volume = this.muted ? 0 : Math.min(1.0, this.volume * 2.0);
 
     // 2. Web Audio GainNode (crucial for iOS Safari software volume & mute control)
     if (this.bgmGain && this.audioCtx) {
@@ -120,8 +142,57 @@ export class AudioManager {
   }
 
   playOpen() {
-    this.open.currentTime = 0;
-    this.open.play().catch(() => {});
+    if (this.muted) return;
+    this.initWebAudio();
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume().catch(() => {});
+    }
+
+    // 1. Tactile mechanical latch release transient
+    if (this.audioCtx && !this.muted) {
+      try {
+        const t = this.audioCtx.currentTime;
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(860, t);
+        osc.frequency.exponentialRampToValueAtTime(140, t + 0.035);
+        const latchVol = Math.min(0.4, (this.volume || 0.4) * 0.8);
+        gain.gain.setValueAtTime(latchVol, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.035);
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
+        osc.start(t);
+        osc.stop(t + 0.035);
+      } catch {}
+    }
+
+    // 2. Rich wooden box opening sound (Web Audio buffer or HTML5 Audio fallback)
+    let playedViaWebAudio = false;
+    if (this.audioCtx && this.openBuffer) {
+      try {
+        const src = this.audioCtx.createBufferSource();
+        src.buffer = this.openBuffer;
+        const gain = this.audioCtx.createGain();
+        // box-open.mp3 is mastered at -35 dB mean volume; amplify it so it is crisp and clear
+        const vol = Math.min(1.0, (this.volume || 0.4) * 2.2 + 0.15);
+        gain.gain.setValueAtTime(vol, this.audioCtx.currentTime);
+        src.connect(gain);
+        gain.connect(this.audioCtx.destination);
+        src.start(0);
+        playedViaWebAudio = true;
+      } catch (err) {
+        console.warn('Web Audio buffer playback failed:', err);
+      }
+    }
+
+    if (!playedViaWebAudio) {
+      try {
+        this.open.currentTime = 0;
+        this.open.volume = Math.min(1.0, (this.volume || 0.4) * 2.0);
+        this.open.play().catch(() => {});
+      } catch {}
+    }
   }
 
   playSwitch() {

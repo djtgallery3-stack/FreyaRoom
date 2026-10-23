@@ -26,6 +26,7 @@ export class Player {
     this.moving = false;
     this.isMobile = false;
     this.isPlaying = false;
+    this.frozen = false;
     this.touchMove = new THREE.Vector2();
 
     camera.position.copy(SPAWN.position).setY(EYE_HEIGHT);
@@ -67,7 +68,20 @@ export class Player {
     this.camera.rotation.x = THREE.MathUtils.clamp(this.camera.rotation.x - deltaPitch, minPitch, maxPitch);
   }
 
+  setFrozen(frozen) {
+    this.frozen = !!frozen;
+    if (this.frozen) {
+      this.velocity.set(0, 0);
+      this.moving = false;
+    }
+  }
+
   update(dt) {
+    if (this.frozen) {
+      this.velocity.set(0, 0);
+      this.moving = false;
+      return;
+    }
     dt = Math.min(dt, 0.05);
     const k = this.keys;
     let f = 0;
