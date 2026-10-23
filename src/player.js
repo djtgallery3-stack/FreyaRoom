@@ -24,6 +24,9 @@ export class Player {
     this.keys = new Set();
     this.bob = 0;
     this.moving = false;
+    this.isMobile = false;
+    this.isPlaying = false;
+    this.touchMove = new THREE.Vector2();
 
     camera.position.copy(SPAWN.position).setY(EYE_HEIGHT);
     camera.rotation.set(0, SPAWN.yaw, 0, 'YXZ');
@@ -53,6 +56,17 @@ export class Player {
     this.controls.unlock();
   }
 
+  setTouchMove(forward, right) {
+    this.touchMove.set(right, forward);
+  }
+
+  addLookRotation(deltaYaw, deltaPitch) {
+    this.camera.rotation.y -= deltaYaw;
+    const minPitch = -Math.PI / 2 + 0.08;
+    const maxPitch = Math.PI / 2 - 0.08;
+    this.camera.rotation.x = THREE.MathUtils.clamp(this.camera.rotation.x - deltaPitch, minPitch, maxPitch);
+  }
+
   update(dt) {
     dt = Math.min(dt, 0.05);
     const k = this.keys;
@@ -62,7 +76,11 @@ export class Player {
       if (k.has('KeyW') || k.has('ArrowUp')) f += 1;
       if (k.has('KeyS') || k.has('ArrowDown')) f -= 1;
       if (k.has('KeyD') || k.has('ArrowRight')) r += 1;
-      if (k.has('KeyA') || k.has('ArrowLeft')) r -= 1;
+      if (k.has('KeyA') || k.has('ArrowLeft')) r += 1;
+    }
+    if (this.isMobile && this.isPlaying) {
+      f += this.touchMove.y;
+      r += this.touchMove.x;
     }
     const speed = k.has('ShiftLeft') || k.has('ShiftRight') ? RUN : WALK;
 
@@ -74,9 +92,10 @@ export class Player {
     let dx = -sin * f + cos * r;
     let dz = -cos * f - sin * r;
     const len = Math.hypot(dx, dz);
+    const inputMagnitude = Math.min(1, Math.hypot(f, r));
     if (len > 0) {
-      dx = (dx / len) * speed;
-      dz = (dz / len) * speed;
+      dx = (dx / len) * speed * inputMagnitude;
+      dz = (dz / len) * speed * inputMagnitude;
     }
 
     // exponential approach to target velocity = smooth acceleration + friction

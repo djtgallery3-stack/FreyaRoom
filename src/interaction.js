@@ -42,6 +42,12 @@ export class Interaction {
     this.#animateLids(dt);
   }
 
+  /** Raycast from arbitrary normalized screen coordinates [-1, 1] (e.g. mobile direct tap). */
+  raycastPoint(coords) {
+    this.raycaster.setFromCamera(coords, this.camera);
+    return this.raycaster.intersectObjects(this.proxies, false)[0]?.object.userData.interactable ?? null;
+  }
+
   /** Clear hover highlight on any currently hovered object. */
   clearHover() {
     if (this.hovered) {

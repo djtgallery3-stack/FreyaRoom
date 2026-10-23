@@ -23,23 +23,50 @@
         aria-live="polite"
         class="pointer-events-none absolute left-1/2 top-[53%] -translate-x-1/2 rounded-full bg-black/80 px-4 py-1.5 text-xs sm:text-sm font-semibold text-pink-200 ring-1 ring-white/20 shadow-lg backdrop-blur-md opacity-0 transition-all duration-150 tracking-wide select-none whitespace-nowrap"
       ></p>
-      <p class="absolute bottom-4 left-4 hidden rounded-lg bg-black/40 px-3 py-2 text-xs leading-relaxed text-white/80 backdrop-blur sm:block">
+      <p id="hud-desktop-help" class="absolute bottom-4 left-4 hidden rounded-lg bg-black/40 px-3 py-2 text-xs leading-relaxed text-white/80 backdrop-blur sm:block">
         <kbd class="kbd">W</kbd><kbd class="kbd">A</kbd><kbd class="kbd">S</kbd><kbd class="kbd">D</kbd> jalan ·
         <kbd class="kbd">Shift</kbd> lari · <kbd class="kbd">E</kbd>/klik interaksi ·
         <kbd class="kbd">L</kbd> saklar lampu · <kbd class="kbd">P</kbd> musik · <kbd class="kbd">M</kbd> bisukan ·
         <kbd class="kbd">,</kbd>/<kbd class="kbd">.</kbd> volume · <kbd class="kbd">Esc</kbd> lepas kursor
       </p>
+
+      <!-- Mobile Virtual Joystick (Bottom Left) -->
+      <div id="joystick-zone" class="fixed bottom-6 left-6 z-30 hidden h-32 w-32 select-none touch-none items-center justify-center rounded-full bg-black/35 ring-2 ring-white/20 backdrop-blur-sm pointer-events-auto shadow-2xl">
+        <div id="joystick-knob" class="h-14 w-14 rounded-full bg-pink-300/80 ring-2 ring-white/90 shadow-lg pointer-events-none transition-transform duration-75"></div>
+      </div>
+
+      <!-- Mobile Floating Action Buttons (Bottom Right) -->
+      <div id="mobile-actions" class="fixed bottom-6 right-6 z-30 hidden flex-col items-end gap-3 pointer-events-auto select-none touch-none">
+        <!-- Action Button (Buka / Lihat) -->
+        <button id="mobile-action-btn" type="button" class="flex items-center gap-2 rounded-full bg-black/60 px-5 py-3 text-sm font-semibold text-white/90 ring-1 ring-white/20 backdrop-blur shadow-xl transition active:scale-95" aria-label="Interaksi">
+          <span id="mobile-action-icon">🖐️</span>
+          <span id="mobile-action-label">Buka/Lihat</span>
+        </button>
+
+        <!-- Quick Lighting Toggle Button -->
+        <button id="mobile-light-btn" type="button" class="flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-amber-300 ring-1 ring-white/20 backdrop-blur shadow-lg active:scale-95" aria-label="Ganti Mode Lampu" title="Lampu">
+          <span class="text-xl">💡</span>
+        </button>
+      </div>
     </div>
 
-    <!-- Visitor Counter (aesthetic real-time badge) -->
-    <div id="visitor-counter" class="fixed left-4 top-4 z-30 hidden items-center gap-2.5 rounded-full bg-black/45 px-3.5 py-2 backdrop-blur ring-1 ring-white/10 select-none">
-      <span class="relative flex h-2 w-2" aria-hidden="true">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-      </span>
-      <span class="text-xs font-medium text-white/80">Kunjungan</span>
-      <span class="h-3 w-px bg-white/20" aria-hidden="true"></span>
-      <span id="visitor-count" class="font-mono text-xs font-bold tracking-wider text-pink-300">1</span>
+    <!-- Top Left Bar: Mobile Pause / Menu & Visitor Counter -->
+    <div class="fixed left-4 top-4 z-40 flex items-center gap-2 select-none">
+      <!-- Mobile Pause / Menu Button (always clearly visible in mobile mode) -->
+      <button id="mobile-menu-btn" type="button" class="hidden items-center gap-1.5 rounded-full bg-black/60 px-3.5 py-2 text-xs font-semibold text-white backdrop-blur ring-1 ring-white/20 active:scale-95 transition shadow-lg" aria-label="Buka Menu / Esc">
+        <span>⏸️ Menu / Esc</span>
+      </button>
+
+      <!-- Visitor Counter (aesthetic real-time badge) -->
+      <div id="visitor-counter" class="hidden items-center gap-2.5 rounded-full bg-black/45 px-3.5 py-2 backdrop-blur ring-1 ring-white/10">
+        <span class="relative flex h-2 w-2" aria-hidden="true">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs font-medium text-white/80">Kunjungan</span>
+        <span class="h-3 w-px bg-white/20" aria-hidden="true"></span>
+        <span id="visitor-count" class="font-mono text-xs font-bold tracking-wider text-pink-300">1</span>
+      </div>
     </div>
 
     <!-- Controls Bar: Light Mood Toggle + BGM Audio Controls -->
@@ -107,7 +134,10 @@
         <button id="start-btn" type="button" class="mt-6 w-full rounded-full bg-pink-300 px-6 py-3 font-semibold text-[#2a1b3a] transition hover:bg-pink-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
           <span id="start-label">Klik untuk masuk</span>
         </button>
-        <dl class="mt-6 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-left text-xs text-white/60">
+        <button id="exit-fullscreen-btn" type="button" class="mt-3 hidden w-full rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-sm font-semibold text-white/90 transition hover:bg-white/20 active:scale-98 select-none">
+          🚪 Keluar Fullscreen (Exit)
+        </button>
+        <dl id="desktop-instructions" class="mt-6 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-left text-xs text-white/60">
           <dt><kbd class="kbd">W</kbd><kbd class="kbd">A</kbd><kbd class="kbd">S</kbd><kbd class="kbd">D</kbd> / panah</dt><dd>Berjalan (tahan <kbd class="kbd">Shift</kbd> untuk lari)</dd>
           <dt>Mouse</dt><dd>Melihat sekeliling</dd>
           <dt><kbd class="kbd">E</kbd> / klik</dt><dd>Buka kotak, foto, boneka, atau saklar</dd>
@@ -116,6 +146,20 @@
           <dt><kbd class="kbd">,</kbd> / <kbd class="kbd">.</kbd></dt><dd>Kecilkan / besarkan volume musik</dd>
           <dt><kbd class="kbd">Esc</kbd></dt><dd>Lepas kursor / tutup jendela</dd>
         </dl>
+        <div id="mobile-instructions" class="mt-6 hidden flex-col gap-2.5 text-left text-xs text-white/70">
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm">🕹️</span>
+            <span>Joystick kiri untuk berjalan &amp; bergerak</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm">👆</span>
+            <span>Usap layar kanan untuk melihat sekeliling</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm">🖐️</span>
+            <span>Tap tombol aksi atau tap langsung objek 3D untuk membukanya</span>
+          </div>
+        </div>
         <p id="start-note" class="mt-5 hidden text-xs text-amber-200/80">
           Pengalaman ini dirancang untuk desktop dengan keyboard &amp; mouse.
         </p>
